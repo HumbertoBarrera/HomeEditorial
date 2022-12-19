@@ -1,19 +1,18 @@
 import {pool} from "../db.js"
 
 
+
 export const getLogin = async (req, res) => {
 
-    const email = req.body.email;
-    const password = req.body.password
-
+    const {email, pass} = req.body
     try{
         const [row] = await pool.query('SELECT * FROM cliente WHERE correoElec = ? and password= ?' ,
-                                        [email, password])
+                                        [email, pass])
         if (row.length <= 0) return res.status(404).json({
             message: 'No se encontró el cliente '
         })
         else{
-            res.send('Correo electrónico y/o contraseña incorrecta')
+            res.send('Usuario correcto')
         }
         res.json(row[0])
     }catch (error){

@@ -35,7 +35,7 @@
                                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Log in</h1>
                             </div>
                             <div class="modal-body">
-                                <form id="form_idL" method="post" name="myform">
+                                <form  action="api/auth" method="POST" name="myform">
                                     <div class="mb-3">
                                         <label for="nombre" class="form-label">Correo:</label>
                                         <input type="email" class="form-control" id="email" name="email"
@@ -50,7 +50,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <a href="" onclick="changeSqu(event, 'login', 'signup');">Registrar cuenta</a>
-                                        <input id="submit" type="submit" class="btn btn-primary" value= "Iniciar sesion"/>
+                                        <input type="submit" class="btn btn-primary" value= "Iniciar sesion"/>
                                 </form>
                                     </div>
                         </div>
