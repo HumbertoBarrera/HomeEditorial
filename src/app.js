@@ -64,6 +64,12 @@ app.get('/micarrito', function(req, response) {
 	response.sendFile(path.join(__dirname + '/contents/micarrito.html'));
 });
 
+// Pedidos
+app.get('/mispedidos', function (req, response) {
+	// Render login template
+	response.sendFile(path.join(__dirname + '/contents/pedidos.html'));
+});
+
 // Catálogo
 app.get('/catalogo', function(req, response) {
 	// Render login template
