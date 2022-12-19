@@ -14,7 +14,6 @@ export const getLogin = async (req, res) => {
         else{
             res.send('Usuario correcto')
         }
-        res.json(row[0])
     }catch (error){
         return res.status(500).json({
             message: 'Algo salió mal'
