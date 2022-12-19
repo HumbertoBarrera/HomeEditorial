@@ -76,6 +76,17 @@ app.get('/catalogo', function(req, response) {
 	response.sendFile(path.join(__dirname + '/contents/catalogo.html'));
 });
 
+// Catálogo
+app.get('/mispagos', function (req, response) {
+	// Render login template
+	response.sendFile(path.join(__dirname + '/contents/mispagos.html'));
+});
+
+app.get('/ventas', function (req, response) {
+	// Render login template
+	response.sendFile(path.join(__dirname + '/contents/ventas.html'));
+});
+
 app.use((req, res, next) => {
     res.status(404).json({
         message: 'API Not found'
