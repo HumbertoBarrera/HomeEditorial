@@ -1,4 +1,5 @@
 import express, { response } from 'express';
+import cors from 'cors';
 import path from 'path';
 import session from 'express-session';
 import fs from 'fs'
@@ -13,7 +14,6 @@ import enviosRoutes from './routes/envios.router.js';
 import ordenRoutes from './routes/orden.routes.js';
 import pingRoute from './routes/ping.routes.js';
 
-const cors = require('cors');
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -96,7 +96,7 @@ app.get('/mispedidos', (req, res) => {
 // Catálogo
 app.get('/catalogo', (req, res) => {
 	pool.execute('SELECT * FROM producto').then(([data, fields]) => {
-		console.log(data)
+		//console.log(data)
 		res.render('catalogo', {userLogged: req.session.loggedIn, user: req.session.user, productos: data});
 	})
 });
