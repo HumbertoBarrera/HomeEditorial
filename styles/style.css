@@ -43,6 +43,14 @@ main {
     transform: translateY(-3px);
 }
 
+.navIcon:hover {
+    cursor: pointer;
+}
+
+.navHome:hover {
+    cursor: pointer;
+}
+
 .riNav {
     display: flex;
     flex-direction: row;

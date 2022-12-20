@@ -2,11 +2,10 @@ insertShared();
 
 function insertShared() {
     $(function () {
-        $("#headerArea").load("/shared/nav.html");
-        $("#footer").load("/shared/footer.html");
-        $.get('/shared/head.html', function (response) {
+        $("#headerArea").load("/nav.html");
+        $("#footer").load("/footer.html");
+        $.get('/head.html', function (response) {
             $('head').append(response);
         });
     });
-    console.log("BOO")
 }

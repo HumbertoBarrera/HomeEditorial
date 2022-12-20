@@ -15,7 +15,7 @@ router.patch('/clientes', updateClientes);
 
 router.delete('/clientes', deleteClientes);
 
-router.get('/login', getLogin);
+router.post('/auth', getLogin);
 
 
 export default router

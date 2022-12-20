@@ -16,7 +16,11 @@
                 <button id="searchBut" class="btn btn-outline-success" type="submit">Buscar</button>
             </form>
             <button onclick='location.href="/micarrito"' class="brl-butt"><img src="/cart.png"alt="" width="30px"></button>
-            <a class="login" href="/iniciar_sesion">Iniciar Sesión</a>
+            <% if (userLogged) { %>
+                <a class="login" href="/micuenta"><%= user.nombre %></a>
+            <% } else { %>
+                <a class="login" href="/iniciar_sesion">Iniciar Sesión</a>
+            <% } %>
         </div>
     </div>
     </div>
@@ -37,9 +41,11 @@
             aria-controls="navbarToggleExternalContent" onclick='location.href="/micuenta"'>
             <a>Mi cuenta</a>
         </li>
+        <% if (userLogged) { %>
         <li type="button" onclick='location.href="/salir"' data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent"
             aria-controls="navbarToggleExternalContent">
             <a>Salir</a>
         </li>
+        <% } %>
     </ul>
 </div>
