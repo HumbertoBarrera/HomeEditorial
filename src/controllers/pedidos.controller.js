@@ -1,4 +1,5 @@
 import {pool} from "../db.js"
+import session from "express-session";
 
 const carrito = [
     {   
@@ -19,10 +20,15 @@ const carrito = [
 
 export const getPedidos = async (req, res) => {
     try{
-        const [rows] = await pool.query('SELECT * FROM pedido')
+        const [rows] = await pool.query('SELECT * FROM pedido WHERE idCliente = ?', [req.session.cliente_id])
         if (rows.length <= 0) return res.status(404).json({
             message: 'No se encontró ningún pedido'
         })
+        else {
+            for (let i = 0; i <= rows.length; i++) {
+                req.session.ped
+            }
+        }
         res.json(rows)
     }catch (error){
         return res.status(500).json({
