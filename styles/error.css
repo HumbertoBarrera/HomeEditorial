@@ -1,0 +1,36 @@
+@import "style.css";
+
+@keyframes floating {
+    0% {
+        transform: translateY(0px);
+    }
+
+    25% {
+        transform: translateY(-25px);
+    }
+
+    50% {
+        transform: translateY(0px);
+    }
+
+    75% {
+        transform: translateY(-25px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.mainBox img {
+    animation: floating 5s infinite;
+}
+
+.mainBox {
+    width: 100%;
+    flex-direction: column;
+    flex-wrap: wrap;
+    text-align: center;
+    align-content: center;
+
+}
