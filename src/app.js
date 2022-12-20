@@ -42,7 +42,7 @@ app.use(pingRoute);
 app.use('/api', clientesRoutes);
 app.use('/api', metodopagoRoutes);
 app.use('/api', productosRoutes);
-app.use('/api', pedidosRoutes);
+app.use('/api', cors(),pedidosRoutes);
 app.use('/api', ventasRoutes);
 app.use('/api', enviosRoutes);
 app.use('/api', ordenRoutes);
