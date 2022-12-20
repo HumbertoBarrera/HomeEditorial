@@ -19,6 +19,8 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(path.dirname(__filename));
 
+app.use(cors());
+
 app.use(express.static(path.join(__dirname, 'styles')));
 // app.use(express.static(path.join(__dirname, 'shared')));
 app.use(express.static(path.join(__dirname, 'views/img')));
@@ -36,7 +38,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // APIs
-app.use(cors());
 app.use(pingRoute);
 app.use('/api', clientesRoutes);
 app.use('/api', metodopagoRoutes);
