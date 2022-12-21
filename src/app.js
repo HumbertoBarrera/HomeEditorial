@@ -52,12 +52,6 @@ app.get('/salir', function (req, response) {
 	response.redirect('/');
 });
 
-// Pedidos
-// app.get('/mispedidos', function (req, response) {
-// 	// Render login template
-// 	response.sendFile(path.join(__dirname + '/contents/pedidos.html'));
-// });
-
 // Pruebas para renderizar las vistas de otra forma
 
 app.set('view engine', 'ejs')
@@ -84,6 +78,15 @@ app.get('/micuenta', (req, res) => {
 		res.render('cuenta', {userLogged: req.session.loggedIn, user: req.session.user, direcciones: req.session.direcciones, metodospago: req.session.metodospago})
 	}else{
 		res.render('login', {userLogged: req.session.loggedIn, user: req.session.user})
+	}
+});
+
+// Mis pedidos
+app.get('/mispedidos', (req, res) => {
+	if (req.session.loggedIn) {
+		res.render('pedidos', { userLogged: req.session.loggedIn, user: req.session.user })
+	} else {
+		res.render('login', { userLogged: req.session.loggedIn, user: req.session.user })
 	}
 });
 
