@@ -87,6 +87,15 @@ app.get('/micuenta', (req, res) => {
 	}
 });
 
+// Mis pedidos
+app.get('/mispedidos', (req, res) => {
+	if (req.session.loggedIn) {
+		res.render('pedidos', { userLogged: req.session.loggedIn, user: req.session.user })
+	} else {
+		res.render('login', { userLogged: req.session.loggedIn, user: req.session.user })
+	}
+});
+
 // Catálogo
 app.get('/catalogo', (req, res) => {
 	pool.execute('SELECT * FROM producto').then(([data, fields]) => {

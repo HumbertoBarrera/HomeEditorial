@@ -51,9 +51,9 @@
             </div>
             <div class="catalogo">
                 <div id="pagser">
-                    <p>Pagina XX de XX</p>
+                    <p></p>
                     <div id="paginas">
-                        <a href="">
+                        <a href=""></a>
                     </div>
                     <div>
                         <select>
@@ -71,9 +71,11 @@
                                 <img src=<%= productos[i]['portada'] %> alt="Portada"/>
                                 <span></span>
                             </div>
-                            <p><%= productos[i]['nombre'] %></p>
-                            <p>$<%= productos[i]['precio'] %></p>
-                            <button>Comprar</button>
+                            <div class="libdesc">
+                                <p><%= productos[i]['nombre'].substring(0,20) + "..." %></p>
+                                <p>$<%= productos[i]['precio'] %></p>
+                                <button>Añadir al carrito</button>
+                            </div>
                         </div>
                     <% } %>
                     <!-- <div class="libro">
