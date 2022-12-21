@@ -1,7 +1,7 @@
 import {pool} from "../db.js";
 import User from '../../modelos/usuario.modelo.js'
 import Direccion  from "../../modelos/direccion.modelo.js";
-import MetodoPago from "../../modelos/metodospago.modelo.js";
+import MetodoPago from "../../modelos/metodopago.modelo.js";
 import session from "express-session";
 
 export const getLogin = async (req, res) => {
