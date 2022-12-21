@@ -29,11 +29,13 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">NUMERO DE ORDEN</th>
-                        <th scope="col">FECHA DE ORDEN</th>
+                        <th scope="col">NUMERO DE PEDIDO</th>
+                        <th scope="col">FECHA DE PEDIDO</th>
                         <th scope="col">TOTAL</th>
                         <th scope="col">FECHA DE ENTREGA</th>
                         <th scope="col">ESTADO ENVIO</th>
+                        <th scope="col">CLAVE DE RASTREO</th>
+
                         <th scope="col">FACTURA</th>
                     </tr>
                 </thead>
@@ -41,19 +43,19 @@
                     <% for(let i = 0; i < pedido.length; i++) { %>
                         <tr>
                             <th scope="row"><%= pedido[i]['idPedido'] %></th>
-                            <td><%= pedido[i]['fecha'].toLocaleDateString() %></td>
+                            <td><%= pedido[i]['fecha'] %></td>
                             <td><%= pedido[i]['total'] %></td>
-                            <td><%= pedido[i]['fechaEntrega'] %></td>
+                            <td><%= pedido[i]['fechaEntrega']%></td>
                             <td><%= pedido[i]['estadoEnvio'] %></td>
+                            <td><%= pedido[i]['claveRastreo'] %></td>
                             <td>No disponible</td>
-
-
                         </tr>
                     <% } %>
                 </tbody>
                 <tfoot>
                     <td>
                         <p>RASTREA TU PEDIDO</p>
+
 
                     </td>
                     <td colspan="5">
