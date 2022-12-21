@@ -90,20 +90,6 @@
 
             <div id="direcciones" class="catalogo cuenta">
                 <div class="direccion">
-                    <div class="opText info">
-                        <div class="contenido dir">
-                            <b>Dirección</b>
-                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia, voluptatem accusamus
-                                corrupti tenetur reiciendis ab doloribus rem eum.</p>
-                        </div>
-                        <div id="insEntrega" class="contenido">
-                            <b>Instrucciones de entrega</b>
-                            <p>Ejemplo Ejemplo</p>
-                        </div>
-                        <div class="contenido">
-                            <button class="brl-butt cuen"><img src="/trash.svg" alt=""></button>
-                        </div>
-                    </div>
                     <% if (direcciones.length > 0) { %>
                         <% for (let i = 0; i < direcciones.length; i++) { %>
                             <div class="opText info">
@@ -112,7 +98,13 @@
                                     <p><%= direcciones[i].direccion %></p>
                                 </div>
                                 <div id="insEntrega" class="contenido">
-                                    <b><%= direcciones[i].instrucciones_direccion %></b>
+                                    <b>Instrucciones de entrega</b>
+                                    <% if(direcciones[i].instrucciones_direccion!=""  || direcciones[i].instrucciones_direccion!==null ){ %>
+                                        <p><%= direcciones[i].instrucciones_direccion %></p>
+                                    <% } else{ %>
+                                        <h1>bar</h1>
+                                    <% } %> 
+
                                 </div>
                                 <div class="contenido">
                                     <button class="brl-butt cuen"><img src="/trash.svg" alt=""></button>
@@ -131,35 +123,10 @@
             <!-- Metodos de pago -->
 
             <div id="metpago" class="catalogo cuenta">
-                <div class="opText info">
-                    <div class="contenido">
-                        <div class="opText">
-                            <div id="nombreTarjeta" class="contenido">
-                                <b>Nombre en Tarjeta</b>
-                                <p>John Doe</p>
-                            </div>
-                            <div id="numTarjeta" class="contenido">
-                                <b>Numero de Tarjeta</b>
-                                <p>XXXX XXXX XXXX 4859</p>
-                            </div>
-                            <div class="contenido">
-                                <b>Vencimiento</b>
-                                <p id="venc">12/22</p>
-                            </div>
-                            <div class="contenido">
-                                <b>Código de seguridad (CVV)</b>
-                                <p id="cvv">*****</p>
-                            </div>
-                            <div class="contenido">
-                                <button class="brl-butt cuen"><img src="/trash.svg" alt=""></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <% if (metodospago.length > 0) { %>
                     <% for (let i = 0; i < metodospago.length; i++) { %>
                         <div class="opText info">
-                            <div class="contenido">
+                            <div class="contenido info">
                                 <div class="opText">
                                     <div id="nombreTarjeta" class="contenido">
                                         <b>Nombre en Tarjeta</b>

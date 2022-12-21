@@ -14,6 +14,10 @@
     border-bottom: 1px solid var(--listhead);
 }
 
+.contenido.info {
+    width: 100%;
+}
+
 .contenido.dir {
     max-width: 40%;
 }
