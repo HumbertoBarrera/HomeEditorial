@@ -53,10 +53,10 @@ app.get('/salir', function (req, response) {
 });
 
 // Pedidos
-app.get('/mispedidos', function (req, response) {
-	// Render login template
-	response.sendFile(path.join(__dirname + '/contents/pedidos.html'));
-});
+// app.get('/mispedidos', function (req, response) {
+// 	// Render login template
+// 	response.sendFile(path.join(__dirname + '/contents/pedidos.html'));
+// });
 
 // Pruebas para renderizar las vistas de otra forma
 
@@ -93,6 +93,24 @@ app.get('/catalogo', (req, res) => {
 		console.log(data)
 		res.render('catalogo', {userLogged: req.session.loggedIn, user: req.session.user, productos: data});
 	})
+});
+
+// Carrito
+app.get('/micarrito', (req, res) => {
+	if (req.session.carrito == undefined){
+		req.session.carrito = []
+	}
+	res.render('micarrito', {userLogged: req.session.loggedIn, user: req.session.user, carrito: req.session.carrito})
+});
+
+app.get('/mispedidos', (req, res) => {
+	res.render('pedidos', {userLogged: req.session.loggedIn, user: req.session.user})
+});
+
+
+// Pago
+app.get('/pago', (req, res) => {
+	res.render('mispagos', {userLogged: req.session.loggedIn, user: req.session.user})
 });
 
 app.use((req, res, next) => {
