@@ -30,8 +30,10 @@
                 <thead>
                     <tr>
                         <th scope="col">NUMERO DE ORDEN</th>
-                        <th scope="col">FECHA</th>
+                        <th scope="col">FECHA DE ORDEN</th>
                         <th scope="col">TOTAL</th>
+                        <th scope="col">FECHA DE ENTREGA</th>
+                        <th scope="col">ESTADO ENVIO</th>
                         <th scope="col">FACTURA</th>
                     </tr>
                 </thead>
@@ -41,7 +43,11 @@
                             <th scope="row"><%= pedido[i]['idPedido'] %></th>
                             <td><%= pedido[i]['fecha'].toLocaleDateString() %></td>
                             <td><%= pedido[i]['total'] %></td>
+                            <td><%= pedido[i]['fechaEntrega'] %></td>
+                            <td><%= pedido[i]['estadoEnvio'] %></td>
                             <td>No disponible</td>
+
+
                         </tr>
                     <% } %>
                 </tbody>
