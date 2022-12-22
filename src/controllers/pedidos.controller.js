@@ -20,7 +20,7 @@ const carrito = [
 
 export const getPedidos = async (req, res) => {
     try{
-        const [rows] = await pool.query('SELECT * FROM pedido WHERE idCliente = ?', [req.session.cliente_id])
+        const [rows] = await pool.query('SELECT * FROM pedido WHERE idCliente = ?', [req.body.idCliente])
         if (rows.length <= 0) return res.status(404).json({
             message: 'No se encontró ningún pedido'
         })
