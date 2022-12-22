@@ -21,10 +21,6 @@ const __dirname = path.dirname(path.dirname(__filename));
 
 app.use(cors());
 
-// app.use(cors({
-//     origin: '*'
-// }));
-
 app.use(express.static(path.join(__dirname, 'styles')));
 // app.use(express.static(path.join(__dirname, 'shared')));
 app.use(express.static(path.join(__dirname, 'views/img')));
@@ -114,6 +110,7 @@ app.get('/micarrito', (req, res) => {
 	res.render('micarrito', {userLogged: req.session.loggedIn, user: req.session.user, carrito: req.session.carrito})
 });
 
+// Pedidos
 app.get('/mispedidos', (req, res) => {
 	res.render('pedidos', {userLogged: req.session.loggedIn, user: req.session.user})
 });
