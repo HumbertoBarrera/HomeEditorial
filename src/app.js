@@ -88,7 +88,7 @@ app.get('/micuenta', (req, res) => {
 // Mis pedidos
 app.get('/mispedidos', (req, res) => {
 	if (req.session.loggedIn) {
-		res.render('pedidos', { userLogged: req.session.loggedIn, user: req.session.user })
+		res.render('pedidos', { userLogged: req.session.loggedIn, user: req.session.user, envios: req.session.envios })
 	} else {
 		res.render('login', { userLogged: req.session.loggedIn, user: req.session.user })
 	}
@@ -102,8 +102,6 @@ app.get('/catalogo', (req, res) => {
 	})
 });
 
-<<<<<<< HEAD
-=======
 // Carrito
 app.get('/micarrito', (req, res) => {
 	if (req.session.carrito == undefined){
@@ -111,18 +109,17 @@ app.get('/micarrito', (req, res) => {
 	}
 	res.render('micarrito', {userLogged: req.session.loggedIn, user: req.session.user, carrito: req.session.carrito})
 });
-
+/*
 app.get('/mispedidos', (req, res) => {
 	res.render('pedidos', {userLogged: req.session.loggedIn, user: req.session.user})
 });
-
+*/
 
 // Pago
 app.get('/pago', (req, res) => {
 	res.render('mispagos', {userLogged: req.session.loggedIn, user: req.session.user})
 });
 
->>>>>>> ee80ec252ca896816a338d49bfa2245f805abf8f
 app.use((req, res, next) => {
 	res.status(404).json({
 		message: 'API Not found'
