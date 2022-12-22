@@ -94,6 +94,15 @@ app.get('/mispedidos', (req, res) => {
 	}
 });
 
+//administracion
+app.get('/admin', (req, res) => {
+	if (req.session.loggedIn) {
+		res.render('ventas', { userLogged: req.session.loggedIn, user: req.session.user, envios: req.session.envios })
+	} else {
+		res.render('login', { userLogged: req.session.loggedIn, user: req.session.user })
+	}
+});
+
 // Catálogo
 app.get('/catalogo', (req, res) => {
 	pool.execute('SELECT * FROM producto').then(([data, fields]) => {

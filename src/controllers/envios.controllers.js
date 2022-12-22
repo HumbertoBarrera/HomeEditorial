@@ -7,6 +7,7 @@ import session from "express-session";
 export const getEnvios = async (req, res) => {
     try{
         const [rows] = await pool.query('SELECT * FROM envio')
+        console.log(rows)
         if (rows.length <= 0) {
             req.session.envios = [];
         } else {

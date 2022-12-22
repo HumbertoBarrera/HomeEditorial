@@ -8,60 +8,132 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js"
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
         </script>
-    <script src="/insert.js" type="text/javascript"></script>
-    <script src="/pedidos.js"></script>
+    <script src="/cuenta.js"></script>
+    <script src="/proveedores.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
     <link href="/ventas.css" rel="stylesheet" type="text/css" media="all">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <%- include('./shared/head'); -%>
+
 </head>
 
 <body>
     <header id="headerArea">
-
+        <%- include('./shared/nav'); -%>
     </header>
     <div id="container">
         <main id="mainCont">
-            <h1>Ventas</h1>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th rowspan="2">Fecha</th>
-                        <th rowspan="2">Hora</th>
-                        <th rowspan="2">Folio</th>
-                        <th colspan="2">Datos del cliente</th>
-                        <th colspan="3">Producto</th>
-                        <th rowspan="2">Total</th>
-                    </tr>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>RFC</th>
-                        <th>Código</th>
-                        <th>Cantidad</th>
-                        <th>Precio</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Ejemplo</td>
-                        <td>Ejemplo</td>
-                        <td>Ejemplo</td>
-                        <td>Ejemplo</td>
-                        <td>Ejemplo</td>
-                        <td>Ejemplo</td>
-                        <td>Ejemplo</td>
-                        <td>Ejemplo</td>
-                        <td><b>Ejemplo</b></td>
-                    </tr>
-                </tbody>
-               
-            </table>
+            <div class="sideBox">
+                <div id="cat" class="boxCont">
+                    <p class="menTi">Administrar tienda</p>
+                    <ul>
+                        <li onclick="abrirContNav(event, 'ventas')" class="cuenNav active">
+                            <a>Ventas</a>
+                        </li>
+                        <li onclick="abrirContNav(event, 'pedAct')" class="cuenNav">
+                            <a>Pedidos activos</a>
+                        </li>
+                        <li onclick="abrirContNav(event, 'prov')" class="cuenNav">
+                            <a>Proveedores</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="ventas" class="catalogo cuenta" style="display: block;">
+                <h1>Ventas</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">Fecha</th>
+                            <th rowspan="2">Hora</th>
+                            <th rowspan="2">Folio</th>
+                            <th colspan="2">Datos del cliente</th>
+                            <th colspan="3">Producto</th>
+                            <th rowspan="2">Total</th>
+                        </tr>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>RFC</th>
+                            <th>Código</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ejemplo</td>
+                            <td>Ejemplo</td>
+                            <td>Ejemplo</td>
+                            <td>Ejemplo</td>
+                            <td>Ejemplo</td>
+                            <td>Ejemplo</td>
+                            <td>Ejemplo</td>
+                            <td>Ejemplo</td>
+                            <td><b>Ejemplo</b></td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+            <div id="pedAct" class="catalogo cuenta" >
+                <h1>Pedidos en progreso</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID del Pedido</th>
+                            <th>Subtotal</th>
+                            <th>IVA</th>
+                            <th>Total</th>
+                            <th>Fecha</th>
+                            <th>ID del cliente</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ejemplo</td>
+                            <td>Ejemplo</td>
+                            <td>Ejemplo</td>
+                            <td>Ejemplo</td>
+                            <td>Ejemplo</td>
+                            <td>Ejemplo</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="prov" class="catalogo cuenta">
+                <h1>INFORMACIÓN DE PRODUCTOS</h1>
+                <h6>Formulario para la solicitud de productos</h6>
+                <p>Llene todos los datos para procesar el pedido</p>
+                <form class="provForm">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+                    </div>
+                    <div class="mb-3">
+                        <input type="number" class="form-control" id="importe" onfocusout="getTotal()" placeholder="Importe">
+                    </div>
+                    <div class="mb-3">
+                        <input type="number" class="form-control" id="cantidad" onfocusout="getTotal()" placeholder="Cantidad">
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="descripcion" placeholder="Descripción">
+                    </div>
+                    <div class="mb-3">
+                        <input type="number" class="form-control" id="total" placeholder="Total" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <input type="date" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
         </main>
     </div>
     <footer id="footer">
-
+        <%- include('./shared/footer'); -%>
     </footer>
 </body>
 

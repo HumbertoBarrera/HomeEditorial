@@ -1,5 +1,45 @@
 @import "pedidos.css";
+@import "micuenta.css";
 
 th {
     vertical-align: middle;
+}
+
+.provForm {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 1px 93px;
+}
+
+button.btn.btn-primary {
+    margin: 2px auto;
+    width: 225px;
+}
+
+.sideBox {
+    width: 23%;
+}
+
+.boxCont {
+    width: 90%;
+}
+
+.catalogo {
+    width: 77%;
+}
+
+#prov {
+    text-align: center;
+}
+
+.mb-3 {
+    min-width: 46%;
+}
+
+input[type=number] {
+    height: 38px;
+    width: 100%;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
 }

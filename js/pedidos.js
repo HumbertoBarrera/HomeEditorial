@@ -1,3 +1,8 @@
+import getEnvios from '../src/controllers/envios.controllers.js'
+
+console.log(getEnvios);
+
+
 function factura(e) {
     e.preventDefault();
 }
