@@ -184,3 +184,7 @@ main {
 .modal-header {
     background-color: var(--listhead);
 }
+
+table {
+    vertical-align: middle !important;
+}
