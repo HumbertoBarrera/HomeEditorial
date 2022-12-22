@@ -133,7 +133,7 @@ app.get('/mispedidos', (req, res) => {
 
 // Pago
 app.get('/pago', (req, res) => {
-	res.render('mispagos', {userLogged: req.session.loggedIn, user: req.session.user})
+	res.render('mispagos', {userLogged: req.session.loggedIn, user: req.session.user, precioTotal: req.session.precioTotal, direccionActiva: req.session.direccionActiva})
 });
 
 app.use((req, res, next) => {

@@ -36,7 +36,7 @@
                     </div>
                     <div class="total">
                         <p>Total</p>
-                        <p>Total</p>
+                        <p><%= precioTotal %></p>
                     </div>
                 </div>
                 <div class="foot">
@@ -66,24 +66,22 @@
                             <b>Dirección</b>
                         </div>
                         <div id="dirSelecc" class="contenido">
-                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia, voluptatem accusamus
-                                corrupti tenetur reiciendis ab doloribus rem eum. Nemo obcaecati veritatis neque,
-                                aliquid pariatur necessitatibus aspernatur possimus eum nostrum hic.</p>
-                            <p>Ejemplo</p>
-                            <p>Ejemplo</p>
+                            <p><%= direccionActiva.direccion %></p>
                         </div>
                         <div class="contenido">
                             <a class="link" onclick="abrirCont(event, 'opDireccion')">Cambiar</a>
                         </div>
                     </div>
                     <div class="opText">
-                        <div id="insEntrega" class="contenido">
-                            <b>Instrucciones de entrega</b>
-                            <p>Ejemplo Ejemplo</p>
-                        </div>
-                        <div class="contenido">
+                        <% if (direccionActiva.instrucciones) { %>
+                            <div id="insEntrega" class="contenido">
+                                <b>Instrucciones de entrega</b>
+                                <b><%= direccionActiva.instrucciones %></b>
+                            </div>
+                        <% } %>
+                        <!-- <div class="contenido">
                             <a class="link" data-bs-toggle="modal" data-bs-target="#nueDireccion">Cambiar</a>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="opText">
                         <div class="contenido">

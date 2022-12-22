@@ -17,8 +17,9 @@ export const getLogin = async (req, res) => {
             message: 'No se encontró el cliente '
         })
         else{
-            req.session.loggedIn = true
+            req.session.loggedIn = true;
             req.session.precioTotal = 0;
+            req.session.rol = row[0].rol;
             const user = new User(row[0]['idCliente'], row[0]['nombre'], row[0]['correoElec'], row[0]['password']);
             req.session.user = user;
             if (row_direccion.length > 0){
@@ -28,6 +29,10 @@ export const getLogin = async (req, res) => {
                     direcciones.push(direccion);
                 }
                 req.session.direcciones = direcciones;
+                req.session.direccionActiva = {
+                    direccion: row_direccion[0].Direccion,
+                    instrucciones: row_direccion[0].Instrucciones
+                }
             }else{
                 req.session.direcciones = [];
             }
@@ -41,7 +46,11 @@ export const getLogin = async (req, res) => {
             }else{
                 req.session.metodospago = [];
             }
-            res.redirect('/');
+            if(req.session.rol == 'C') {
+                res.redirect('/');
+            }else{
+                res.redirect('/admin')
+            }
         }
     }catch (error){
         return res.status(500).json({

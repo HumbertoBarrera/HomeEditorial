@@ -26,7 +26,8 @@ function confirmarDat(e, cnav, nnav, pag){
     var val = document.getElementById("opEntrega");
 
     document.getElementById("dirFin").innerHTML = document.getElementById("dirSelecc").innerHTML;
-    document.getElementById("insEntregaFin").innerHTML = document.getElementById("insEntrega").innerHTML;
+    console.log(document.getElementById("insEntregaFin"))
+    if (document.getElementById("insEntregaFin"))   document.getElementById("insEntregaFin").innerHTML = document.getElementById("insEntrega").innerHTML;
     document.getElementById("opEnFin").innerHTML = val.options[val.selectedIndex].text;
     document.getElementById("nomTarFin").innerHTML = document.getElementById("nomTar").innerHTML;
     document.getElementById("numTarFin").innerHTML = document.getElementById("numTar").innerHTML;
