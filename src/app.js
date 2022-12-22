@@ -98,14 +98,6 @@ app.get('/catalogo', (req, res) => {
 	})
 });
 
-app.get('*', (req, res) => {
-	if (req.session.loggedIn) {
-		res.render('error', { userLogged: req.session.loggedIn, user: req.session.user });
-	} else {
-		res.render('error', { userLogged: req.session.loggedIn, user: req.session.user });
-	}
-})
-
 app.use((req, res, next) => {
 	res.status(404).json({
 		message: 'API Not found'
