@@ -13,7 +13,8 @@ import ventasRoutes from './routes/ventas.routes.js';
 import enviosRoutes from './routes/envios.router.js';
 import ordenRoutes from './routes/orden.routes.js';
 import pingRoute from './routes/ping.routes.js';
-
+import carritoRoute from './routes/carrito.routes.js'
+import { exit } from 'process';
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -46,21 +47,19 @@ app.use('/api', pedidosRoutes);
 app.use('/api', ventasRoutes);
 app.use('/api', enviosRoutes);
 app.use('/api', ordenRoutes);
-
+app.use(carritoRoute);
 
 // Vistas
 
+// Cerrar sesión
 app.get('/salir', function (req, response) {
 	// Render login template
 	req.session.destroy();
 	response.redirect('/');
 });
 
-// Pruebas para renderizar las vistas de otra forma
-
 app.set('view engine', 'ejs')
 app.set('views', [__dirname + '/views', __dirname + '/views/contents'])
-// app.set('contents', __dirname + '/views/contents')
 
 // Menú principal
 app.get('/', (req, res) => {
@@ -98,8 +97,12 @@ app.get('/mispedidos', (req, res) => {
 
 // Catálogo
 app.get('/catalogo', (req, res) => {
+	if (req.session.carrito == undefined){
+		req.session.carrito = []
+	}
 	pool.execute('SELECT * FROM producto').then(([data, fields]) => {
-		//console.log(data)
+		// console.log(data[0].idProducto)
+		// exit()
 		res.render('catalogo', {userLogged: req.session.loggedIn, user: req.session.user, productos: data});
 	})
 });
@@ -109,7 +112,7 @@ app.get('/micarrito', (req, res) => {
 	if (req.session.carrito == undefined){
 		req.session.carrito = []
 	}
-	res.render('micarrito', {userLogged: req.session.loggedIn, user: req.session.user, carrito: req.session.carrito})
+	res.render('micarrito', {userLogged: req.session.loggedIn, user: req.session.user, carrito: req.session.carrito, precioTotal: req.session.precioTotal})
 });
 
 // Pedidos

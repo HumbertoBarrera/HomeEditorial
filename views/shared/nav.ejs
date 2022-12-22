@@ -1,3 +1,12 @@
+<script>
+    function mostrarDatos(data){
+        var cantidad = 0;
+        $.each(data, function(i, item){
+            cantidad += item.cantidad
+        });
+        $('#cant').html(cantidad)
+    }
+</script>
 <nav class="navbar navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" title="HOME Editorial">
@@ -15,7 +24,9 @@
                     aria-label="Search">
                 <button id="searchBut" class="btn btn-outline-success" type="submit">Buscar</button>
             </form>
-            <button onclick='location.href="/micarrito"' class="brl-butt"><img src="/cart.png"alt="" width="30px"></button>
+            <button onclick='location.href="/micarrito"' class="brl-butt"><img src="/cart.png"alt="" width="30px">
+                <span id="cant"></span>
+            </button>
             <% if (userLogged) { %>
                 <a class="login" href="/micuenta"><%= user.nombre %></a>
             <% } else { %>

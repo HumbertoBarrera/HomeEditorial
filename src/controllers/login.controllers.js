@@ -18,6 +18,7 @@ export const getLogin = async (req, res) => {
         })
         else{
             req.session.loggedIn = true
+            req.session.precioTotal = 0;
             const user = new User(row[0]['idCliente'], row[0]['nombre'], row[0]['correoElec'], row[0]['password']);
             req.session.user = user;
             if (row_direccion.length > 0){

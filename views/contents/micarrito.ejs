@@ -32,28 +32,31 @@
                             <th scope="col">LIBRO</th>
                             <th scope="col">PRECIO</th>
                             <th scope="col">CANTIDAD</th>
+                            <th scope="col">PRECIO TOTAL</th>
                             <th scope="col">ELIMINAR</th>
                         </tr>
                     </thead>
                     <tbody id="carritoBod">
-                        <!--contenido sera borrado cuando se integre js que lo llene-->
-                        <tr>
-                            <th scope="row">
-                                <div class="multi">
-                                    <img class="cover" src="IT(Eso).jpg" alt="">
-                                    <p class="titulo">IT(Eso)</p>
-                                </div>
-                            </th>
-                            <td><p class="precio">$7883.50</p></td>
-                            <td class="cant">
-                                <div class="multi">
-                                    <button class="qButton">-</button>
-                                    <input type="number" value="5">
-                                    <button class="qButton">+</button>
-                                </div>
-                            </td>
-                            <td><button class="brl-butt"><img src="/trash.svg" alt=""></button></td>
-                        </tr>
+                        <% for (var i = 0; i < carrito.length; i++) { %>
+                            <tr>
+                                <th scope="row">
+                                    <div class="multi">
+                                        <!-- <img class="cover" src="IT(Eso).jpg" alt=""> -->
+                                        <p class="titulo"><%= carrito[i].nombre %></p>
+                                    </div>
+                                </th>
+                                <td><p class="precio"><%= carrito[i].precio %></p></td>
+                                <td class="cant">
+                                    <div class="multi">
+                                        <button class="qButton">-</button>
+                                        <input type="number" value="<%= carrito[i].cantidad %>">
+                                        <button class="qButton">+</button>
+                                    </div>
+                                </td>
+                                <td><p class="precio"><%= carrito[i].precio_total %></p></td>
+                                <td><button class="brl-butt"><img src="/trash.svg" alt=""></button></td>
+                            </tr>
+                        <% } %>
                     </tbody>
                 </table>
             </div>
@@ -69,7 +72,7 @@
                     </div>
                     <div class="total">
                         <p>Total</p>
-                        <p>Total</p>
+                        <p><%= precioTotal %></p>
                     </div>
                 </div>
                 <div class="foot">
