@@ -21,7 +21,8 @@
 <body>
     <script>
         function agregarItem(external){
-            var url = 'http://localhost:3000/agregar' + external;
+            // var url = 'http://localhost:3000/agregar' + external;
+            var url = 'https://homeeditorial-production.up.railway.app/agregar' + external;
             $.ajax({
                 url: url,
                 type: 'GET',
@@ -85,6 +86,7 @@
                         <div class="libro">
                             <div class="cover">
                                 <img src=<%= productos[i]['portada'] %> alt="Portada"/>
+                                <!-- <img src="https://drive.google.com/uc?export=view&id=1ZpKCS8Z2vwrVX5YwSjmmGcz3VJHrTEMr" alt="Portada"/> -->
                                 <span></span>
                             </div>
                             <div class="libdesc">
