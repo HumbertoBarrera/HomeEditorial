@@ -1,4 +1,4 @@
-class envio {
+class Envio {
     constructor(clave, fecha, estado, id) {
         this.clave = clave;
         this.fecha = fecha;
@@ -7,4 +7,4 @@ class envio {
     }
 };
 
-export default envio;
+export default Envio;

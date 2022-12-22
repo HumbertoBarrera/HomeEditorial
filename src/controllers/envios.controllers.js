@@ -1,13 +1,24 @@
-import {pool} from "../db.js"
+import { pool } from "../db.js"
+import Envio from '../../modelos/envio.modelo.js'
+import session from "express-session";
+
 
 
 export const getEnvios = async (req, res) => {
     try{
         const [rows] = await pool.query('SELECT * FROM envio')
-        if (rows.length <= 0) return res.status(404).json({
-            message: 'No se encontró ningún envío'
-        })
-        res.json(rows)
+        if (rows.length <= 0) {
+            req.session.envios = [];
+        } else {
+            var envios = [];
+            for (let i = 0; i < rows.length; i++) {
+                const envio = new Envio(rows[i]['claveRastreo'], rows[i]['fechaEntrega'], rows[i]['estadoEnvio'], rows[i]['idPedido']);
+                envios.push(envio);
+            }
+            req.session.envios = envios;
+            console.log(req.session.envios);
+        }
+        res.redirect('/');
     }catch (error){
         return res.status(500).json({
             message: 'Algo salió mal'
@@ -16,7 +27,7 @@ export const getEnvios = async (req, res) => {
 }
 
 export const solicTrans = async (req, res) => {
-    try{
+    try {
         const date = new Date();
         const [row] = await pool.query("SELECT O.idPedido as 'NoVta', PR.nombre as 'Producto', CONCAT(DIR.ciudad, ', ', DIR.estado) as 'NombreDest',\n"+
                     "CONCAT(DIR.calle, ' #', DIR.numeroExt, ' Colonia ', DIR.colonia) as 'DirDest', DIR.comentarios as 'Instrucciones de entrega' FROM orden O \n"+

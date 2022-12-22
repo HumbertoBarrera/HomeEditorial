@@ -88,7 +88,7 @@ app.get('/micuenta', (req, res) => {
 // Mis pedidos
 app.get('/mispedidos', (req, res) => {
 	if (req.session.loggedIn) {
-		res.render('pedidos', { userLogged: req.session.loggedIn, user: req.session.user })
+		res.render('pedidos', { userLogged: req.session.loggedIn, user: req.session.user, envios: req.session.envios })
 	} else {
 		res.render('login', { userLogged: req.session.loggedIn, user: req.session.user })
 	}
@@ -111,10 +111,11 @@ app.get('/micarrito', (req, res) => {
 });
 
 // Pedidos
+/*
 app.get('/mispedidos', (req, res) => {
 	res.render('pedidos', {userLogged: req.session.loggedIn, user: req.session.user})
 });
-
+*/
 
 // Pago
 app.get('/pago', (req, res) => {
