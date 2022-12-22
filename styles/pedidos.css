@@ -42,3 +42,16 @@ tr {
     width: 30%;
     margin-right: 10%;
 }
+
+.envio {
+    background-color: #eeebe2;
+    width: 44%;
+    padding: 9px;
+    margin: 0px 24px;
+    justify-content: space-between;
+    align-items: center;
+    display: inline-flex;
+}
+.enTe p {
+    margin: 0px;
+}
