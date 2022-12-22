@@ -19,11 +19,11 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(path.dirname(__filename));
 
-// app.use(cors());
+app.use(cors());
 
-app.use(cors({
-    origin: '*'
-}));
+// app.use(cors({
+//     origin: '*'
+// }));
 
 app.use(express.static(path.join(__dirname, 'styles')));
 // app.use(express.static(path.join(__dirname, 'shared')));
