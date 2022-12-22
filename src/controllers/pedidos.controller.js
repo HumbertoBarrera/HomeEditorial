@@ -1,5 +1,6 @@
 import {pool} from "../db.js"
 import session from "express-session";
+import { exit } from "process";
 
 const carrito = [
     {   
@@ -119,9 +120,11 @@ export const createPedido_VO = async (req, res) => {
         const [row_pedido] = await pool.query('INSERT INTO pedido (idCliente) VALUES (3)');
         //insertar productos en orden
         const {NoOrd,MontoTotal,NoArt,CantidadProd, NoProd, NomProd, DescProd, NoSerieProd, PrecioProd} = req.body;
+        const [row_producto] = await pool.query('SELECT idProducto FROM producto WHERE nombre = ?', [NomProd]);
+        var idProd = row_producto[0]['idProducto'];
         ivaProd = PrecioProd * (16/100);
         const [row_orden] = await pool.query('INSERT INTO orden (idPedido, idProducto, precioUni, cantidad, monto, iva) VALUES (?, ?, ?, ?, ?, ?)',
-                                [row_pedido.insertId, NoProd, PrecioProd, CantidadProd, MontoTotal, ivaProd]);
+                                [row_pedido.insertId, idProd, PrecioProd, CantidadProd, MontoTotal, ivaProd]);
         ivaTotal += ivaProd;
         //actualizar pedidos con fecha y total
         var date = new Date();
