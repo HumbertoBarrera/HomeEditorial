@@ -88,7 +88,9 @@ app.get('/micuenta', (req, res) => {
 // Mis pedidos
 app.get('/mispedidos', (req, res) => {
 	if (req.session.loggedIn) {
-		res.render('pedidos', { userLogged: req.session.loggedIn, user: req.session.user, envios: req.session.envios })
+		pool.execute('SELECT * FROM pedido LEFT JOIN envio ON pedido.idPedido = envio.idPedido  WHERE pedido.idCliente = ?', [req.session.user.id]).then(([data, fields]) => {
+			res.render('pedidos', { userLogged: req.session.loggedIn, user: req.session.user, envios: req.session.envios , pedido: data });
+		})
 	} else {
 		res.render('login', { userLogged: req.session.loggedIn, user: req.session.user })
 	}

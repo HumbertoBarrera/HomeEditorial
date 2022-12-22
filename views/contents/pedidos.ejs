@@ -30,26 +30,26 @@
                 <thead>
                     <tr>
                         <th scope="col">NUMERO DE ORDEN</th>
-                        <th scope="col">FECHA</th>
-                        <th scope="col">REGISTRO</th>
+                        <th scope="col">FECHA DE ORDEN</th>
+                        <th scope="col">TOTAL</th>
+                        <th scope="col">FECHA DE ENTREGA</th>
+                        <th scope="col">ESTADO ENVIO</th>
                         <th scope="col">FACTURA</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!--contenido sera borrado cuando se integre js que lo llene-->
-                    <tr>
-                        <th scope="row">145345435</th>
-                        <td>Ejemplo</td>
-                        <td><a href="seguimiento.html">Ejemplo</a></td>
-                        <td>No disponible</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">145345435</th>
-                        <td>Ejemplo</td>
-                        <td>Ejemplo</td>
-                        <td><a href="" data-bs-toggle="modal" data-bs-target="#factura">Ejemplo</a></td>
-                    </tr>
-             
+                    <% for(let i = 0; i < pedido.length; i++) { %>
+                        <tr>
+                            <th scope="row"><%= pedido[i]['idPedido'] %></th>
+                            <td><%= pedido[i]['fecha'].toLocaleDateString() %></td>
+                            <td><%= pedido[i]['total'] %></td>
+                            <td><%= pedido[i]['fechaEntrega'] %></td>
+                            <td><%= pedido[i]['estadoEnvio'] %></td>
+                            <td>No disponible</td>
+
+
+                        </tr>
+                    <% } %>
                 </tbody>
                 <tfoot>
                     <td>
