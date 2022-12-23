@@ -73,6 +73,17 @@
     background-color: darkgreen;
     color: var(--w);
     padding: 0px 20px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.libro button:hover {
+    background-color: rgb(20, 195, 20);
+}
+
+
+.libro button:active {
+    background-color: darkgreen;
 }
 
 .cover {
