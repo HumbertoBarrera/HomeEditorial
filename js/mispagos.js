@@ -12,9 +12,9 @@ function abrirContNav(evt, contNombre) {
 
 function abrirCont(evt, contNombre) {
     evt.preventDefault;
-    
+
     var page;
-    
+
     page = document.getElementsByClassName("opEnvio");
     for (i = 0; i < page.length; i++) {
         page[i].style.display = 'none';
@@ -22,12 +22,17 @@ function abrirCont(evt, contNombre) {
     document.getElementById(contNombre).style.display = "block";
 }
 
-function confirmarDat(e, cnav, nnav, pag){
+function confirmarDat(e, cnav, nnav, pag) {
     var val = document.getElementById("opEntrega");
 
+    console.log(document.getElementById("insEntrega"));
+    
+    
     document.getElementById("dirFin").innerHTML = document.getElementById("dirSelecc").innerHTML;
     console.log(document.getElementById("insEntregaFin"))
-    if (document.getElementById("insEntregaFin"))   document.getElementById("insEntregaFin").innerHTML = document.getElementById("insEntrega").innerHTML;
+    if (document.getElementById("insEntrega") != null) {
+        document.getElementById("insEntregaFin").innerHTML = "<b>Dirección</b>" + document.getElementById("insEntrega").innerHTML;
+    }
     document.getElementById("opEnFin").innerHTML = val.options[val.selectedIndex].text;
     document.getElementById("nomTarFin").innerHTML = document.getElementById("nomTar").innerHTML;
     document.getElementById("numTarFin").innerHTML = document.getElementById("numTar").innerHTML;
@@ -35,7 +40,7 @@ function confirmarDat(e, cnav, nnav, pag){
     navp = document.getElementById(cnav);
     navn = document.getElementById(nnav);
 
-    navp.className = navp.className.replace("active", "");  
+    navp.className = navp.className.replace("active", "");
     navn.className += " active";
 
     abrirCont(e, pag)
