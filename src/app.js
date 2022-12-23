@@ -50,6 +50,7 @@ app.use('/api', ordenRoutes);
 app.use(carritoRoute);
 
 // Vistas
+// Cambio x
 
 // Cerrar sesión
 app.get('/salir', function (req, response) {
@@ -107,7 +108,7 @@ app.get('/admin', (req, res) => {
 // Catálogo
 app.get('/catalogo', (req, res) => {
 	if (req.session.carrito == undefined){
-		req.session.carrito = []
+		req.session.carrito = [];
 	}
 	pool.execute('SELECT * FROM producto').then(([data, fields]) => {
 		// console.log(data[0].idProducto)
