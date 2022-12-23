@@ -129,7 +129,7 @@
                                     </div>
                                     <div id="numTarjeta" class="contenido">
                                         <b>Numero de Tarjeta</b>
-                                        <p><%= "XXXX XXXX XXXX " + metodospago[i].numTarjeta.substring(metodospago[i].numTarjeta.length - 3, metodospago[i].numTarjeta.length ) %></p>
+                                        <p><%= "XXXX XXXX XXXX " + metodospago[i].numTarjeta.slice(-4) %></p>
                                     </div>
                                     <div class="contenido">
                                         <b>Vencimiento</b>
