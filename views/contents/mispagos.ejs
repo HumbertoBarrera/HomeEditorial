@@ -27,16 +27,25 @@
         <main id="mainCont">
             <div class="side">
                 <div>
-                    <p class="menTi">Menu</p>
+                    <p class="menTi">Resumen del pedido</p>
                     <div id="productos">
-                        <div class="producto">
-                            <p>Libro</p>
-                            <p>Precio</p>
-                        </div>
+                        <% for (var i=0; i < carrito.length; i++) { %>
+                            <div class="producto">
+                                <b>
+                                    <%= carrito[i].nombre.substring(0,15) + "..." %>
+                                </b>
+                                <p>
+                                    <%= carrito[i].precio_total.toLocaleString("en", {style: "currency" ,currency: "MXN"
+                                        }); %>
+                                </p>
+                            </div>
+                        <% } %>
                     </div>
                     <div class="total">
-                        <p>Total</p>
-                        <p><%= precioTotal %></p>
+                        <b>Total</b>
+                        <p>
+                            <%= precioTotal.toLocaleString("en", {style: "currency" ,currency: "MXN" }); %>
+                        </p>
                     </div>
                 </div>
                 <div class="foot">
@@ -66,7 +75,9 @@
                             <b>Dirección</b>
                         </div>
                         <div id="dirSelecc" class="contenido">
-                            <p><%= direccionActiva.direccion %></p>
+                            <p>
+                                <%= direccionActiva.direccion %>
+                            </p>
                         </div>
                         <div class="contenido">
                             <a class="link" onclick="abrirCont(event, 'opDireccion')">Cambiar</a>
@@ -76,10 +87,12 @@
                         <% if (direccionActiva.instrucciones) { %>
                             <div class="contenido">
                                 <b>Instrucciones de entrega</b>
-                                <p id="insEntrega" ><%= direccionActiva.instrucciones %></p>
+                                <p id="insEntrega">
+                                    <%= direccionActiva.instrucciones %>
+                                </p>
                             </div>
-                        <% } %>
-                        <!-- <div class="contenido">
+                            <% } %>
+                                <!-- <div class="contenido">
                             <a class="link" data-bs-toggle="modal" data-bs-target="#nueDireccion">Cambiar</a>
                         </div> -->
                     </div>
@@ -142,7 +155,7 @@
                                 <div class="contenido">
                                     <b>Nombre en Tarjeta</b>
                                 </div>
-                                <div  id="nomTar" class="contenido">
+                                <div id="nomTar" class="contenido">
                                     <p>John Doe</p>
                                 </div>
                             </div>
@@ -150,7 +163,7 @@
                                 <div class="contenido">
                                     <b>Numero de Tarjeta</b>
                                 </div>
-                                <div  id="numTar" class="contenido">
+                                <div id="numTar" class="contenido">
                                     <p>XXXX XXXX XXXX 4859</p>
                                 </div>
                             </div>
@@ -179,7 +192,8 @@
                         <div class="contenido">
                         </div>
                         <div class="contenido">
-                            <button onclick="confirmarDat(event, 'pag', 'con', 'confirmacion')" id="aceptPago">Aceptar</button>
+                            <button onclick="confirmarDat(event, 'pag', 'con', 'confirmacion')"
+                                id="aceptPago">Aceptar</button>
                         </div>
                     </div>
                 </div>
@@ -229,7 +243,7 @@
                         </div>
                     </div>
                     <div id="insEnDiv" class="opText">
-                       
+
                     </div>
                     <div class="opText">
                         <div class="contenido">

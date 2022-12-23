@@ -37,15 +37,22 @@
                         </tr>
                     </thead>
                     <tbody id="carritoBod">
-                        <% for (var i = 0; i < carrito.length; i++) { %>
+                        <% for (var i=0; i < carrito.length; i++) { %>
                             <tr>
                                 <th scope="row">
                                     <div class="multi">
                                         <!-- <img class="cover" src="IT(Eso).jpg" alt=""> -->
-                                        <p class="titulo"><%= carrito[i].nombre %></p>
+                                        <p class="titulo">
+                                            <%= carrito[i].nombre %>
+                                        </p>
                                     </div>
                                 </th>
-                                <td><p class="precio"><%= carrito[i].precio %></p></td>
+                                <td>
+                                    <p class="precio">
+                                        <%= carrito[i].precio.toLocaleString("en", {style: "currency" ,currency: "MXN"
+                                            }); %>
+                                    </p>
+                                </td>
                                 <td class="cant">
                                     <div class="multi">
                                         <button class="qButton">-</button>
@@ -53,26 +60,39 @@
                                         <button class="qButton">+</button>
                                     </div>
                                 </td>
-                                <td><p class="precio"><%= carrito[i].precio_total %></p></td>
+                                <td>
+                                    <p class="precio">
+                                        <%= carrito[i].precio_total.toLocaleString("en", {style: "currency"
+                                            ,currency: "MXN" }); %>
+                                    </p>
+                                </td>
                                 <td><button class="brl-butt"><img src="/trash.svg" alt=""></button></td>
                             </tr>
-                        <% } %>
+                            <% } %>
                     </tbody>
                 </table>
             </div>
             <div class="side">
-                
                 <div>
-                    <p class="menTi">Menu</p>
+                    <p class="menTi">Resumen del pedido</p>
                     <div id="productos">
-                        <div class="producto">
-                            <p>Libro</p>
-                            <p>Precio</p>
-                        </div>
+                        <% for (var i=0; i < carrito.length; i++) { %>
+                            <div class="producto">
+                                <b>
+                                    <%= carrito[i].nombre.substring(0,15) + "..." %>
+                                </b>
+                                <p>
+                                    <%= carrito[i].precio_total.toLocaleString("en", {style: "currency" ,currency: "MXN"
+                                        }); %>
+                                </p>
+                            </div>
+                        <% } %>
                     </div>
                     <div class="total">
-                        <p>Total</p>
-                        <p><%= precioTotal %></p>
+                        <b>Total</b>
+                        <p>
+                            <%= precioTotal.toLocaleString("en", {style: "currency" ,currency: "MXN" }); %>
+                        </p>
                     </div>
                 </div>
                 <div class="foot">

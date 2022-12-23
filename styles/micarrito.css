@@ -46,7 +46,7 @@ td {
 .side {
     border: 2px solid var(--bordercolor);
     float: right;
-    height: 512px;
+    min-height: 512px;
     width: 30%;
     display: flex;
     flex-direction: column;
@@ -57,7 +57,11 @@ td {
 .total {
     display: flex;
     justify-content: space-between;
-    margin: 20px;
+    margin: 10px 20px 0px 20px;
+}
+
+.total {
+    border-top: 1px solid var(--listhead);
 }
 
 .side img {

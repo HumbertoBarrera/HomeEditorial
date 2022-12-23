@@ -129,7 +129,7 @@
                                     </div>
                                     <div id="numTarjeta" class="contenido">
                                         <b>Numero de Tarjeta</b>
-                                        <p><%= metodospago[i].numTarjeta %></p>
+                                        <p><%= "XXXX XXXX XXXX " + metodospago[i].numTarjeta.substring(metodospago[i].numTarjeta.length - 3, metodospago[i].numTarjeta.length ) %></p>
                                     </div>
                                     <div class="contenido">
                                         <b>Vencimiento</b>
@@ -137,7 +137,7 @@
                                     </div>
                                     <div class="contenido">
                                         <b>Código de seguridad (CVV)</b>
-                                        <p id="cvv"><%= metodospago[i].cvv %></p>
+                                        <p id="cvv"><%= "**" + metodospago[i].cvv.substring(metodospago[i].cvv.length-1,metodospago[i].cvv.length) %></p>
                                     </div>
                                     <div class="contenido">
                                         <button class="brl-butt cuen"><img src="/trash.svg" alt=""></button>
