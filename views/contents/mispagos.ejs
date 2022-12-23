@@ -74,9 +74,9 @@
                     </div>
                     <div class="opText">
                         <% if (direccionActiva.instrucciones) { %>
-                            <div id="insEntrega" class="contenido">
+                            <div class="contenido">
                                 <b>Instrucciones de entrega</b>
-                                <b><%= direccionActiva.instrucciones %></b>
+                                <p id="insEntrega" ><%= direccionActiva.instrucciones %></p>
                             </div>
                         <% } %>
                         <!-- <div class="contenido">
@@ -86,7 +86,7 @@
                     <div class="opText">
                         <div class="contenido">
                             <select id="opEntrega">
-                                <option selected value="">Normal / Express / Gratis</option>
+                                <option selected>Normal / Express / Gratis</option>
                                 <option value="normal">Normal</option>
                                 <option value="express">Express</option>
                                 <option value="gratis">Gratis</option>
@@ -228,10 +228,8 @@
 
                         </div>
                     </div>
-                    <div class="opText">
-                        <div id="insEntregaFin" class="contenido">
-                          
-                        </div>
+                    <div id="insEnDiv" class="opText">
+                       
                     </div>
                     <div class="opText">
                         <div class="contenido">

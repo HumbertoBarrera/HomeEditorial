@@ -26,12 +26,15 @@ function confirmarDat(e, cnav, nnav, pag) {
     var val = document.getElementById("opEntrega");
 
     console.log(document.getElementById("insEntrega"));
-    
-    
+
+
     document.getElementById("dirFin").innerHTML = document.getElementById("dirSelecc").innerHTML;
     console.log(document.getElementById("insEntregaFin"))
     if (document.getElementById("insEntrega") != null) {
-        document.getElementById("insEntregaFin").innerHTML = "<b>Dirección</b>" + document.getElementById("insEntrega").innerHTML;
+        document.getElementById("insEnDiv").innerHTML = '<div class="contenido">'+
+            '<b> Instrucciones de entrega </b> </div> <div id="insEntregaFin" class="contenido"> '
+            + document.getElementById("insEntrega").innerHTML +
+            '</div > ';
     }
     document.getElementById("opEnFin").innerHTML = val.options[val.selectedIndex].text;
     document.getElementById("nomTarFin").innerHTML = document.getElementById("nomTar").innerHTML;
