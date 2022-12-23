@@ -13,7 +13,8 @@ import ventasRoutes from './routes/ventas.routes.js';
 import enviosRoutes from './routes/envios.router.js';
 import ordenRoutes from './routes/orden.routes.js';
 import pingRoute from './routes/ping.routes.js';
-
+import carritoRoute from './routes/carrito.routes.js'
+import { exit } from 'process';
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -46,21 +47,19 @@ app.use('/api', pedidosRoutes);
 app.use('/api', ventasRoutes);
 app.use('/api', enviosRoutes);
 app.use('/api', ordenRoutes);
-
+app.use(carritoRoute);
 
 // Vistas
 
+// Cerrar sesión
 app.get('/salir', function (req, response) {
 	// Render login template
 	req.session.destroy();
 	response.redirect('/');
 });
 
-// Pruebas para renderizar las vistas de otra forma
-
 app.set('view engine', 'ejs')
 app.set('views', [__dirname + '/views', __dirname + '/views/contents'])
-// app.set('contents', __dirname + '/views/contents')
 
 // Menú principal
 app.get('/', (req, res) => {
@@ -88,8 +87,7 @@ app.get('/micuenta', (req, res) => {
 // Mis pedidos
 app.get('/mispedidos', (req, res) => {
 	if (req.session.loggedIn) {
-		pool.execute('SELECT P.idPedido,DATE_FORMAT(P.fecha, "%d/%m/%Y") AS fecha,P.total, date_format(E.fechaEntrega, "%d/%m/%Y") AS fechaEntrega,E.claveRastreo, E.estadoEnvio  FROM pedido AS P LEFT JOIN envio AS E ON P.idPedido = E.idPedido WHERE idCliente= ?'
-		, [req.session.user.id]).then(([data, fields]) => {
+		pool.execute('SELECT * FROM pedido LEFT JOIN envio ON pedido.idPedido = envio.idPedido  WHERE pedido.idCliente = ?', [req.session.user.id]).then(([data, fields]) => {
 			res.render('pedidos', { userLogged: req.session.loggedIn, user: req.session.user, envios: req.session.envios , pedido: data });
 		})
 	} else {
@@ -97,10 +95,23 @@ app.get('/mispedidos', (req, res) => {
 	}
 });
 
+//administracion
+app.get('/admin', (req, res) => {
+	if (req.session.loggedIn) {
+		res.render('ventas', { userLogged: req.session.loggedIn, user: req.session.user, envios: req.session.envios })
+	} else {
+		res.render('login', { userLogged: req.session.loggedIn, user: req.session.user })
+	}
+});
+
 // Catálogo
 app.get('/catalogo', (req, res) => {
+	if (req.session.carrito == undefined){
+		req.session.carrito = [];
+	}
 	pool.execute('SELECT * FROM producto').then(([data, fields]) => {
-		//console.log(data)
+		// console.log(data[0].idProducto)
+		// exit()
 		res.render('catalogo', {userLogged: req.session.loggedIn, user: req.session.user, productos: data});
 	})
 });
@@ -110,7 +121,7 @@ app.get('/micarrito', (req, res) => {
 	if (req.session.carrito == undefined){
 		req.session.carrito = []
 	}
-	res.render('micarrito', {userLogged: req.session.loggedIn, user: req.session.user, carrito: req.session.carrito})
+	res.render('micarrito', {userLogged: req.session.loggedIn, user: req.session.user, carrito: req.session.carrito, precioTotal: req.session.precioTotal})
 });
 
 // Pedidos
