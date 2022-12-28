@@ -78,15 +78,22 @@
                     <div id="productos">
                         <% for (var i=0; i < carrito.length; i++) { %>
                             <div class="producto">
-                                <b>
-                                    <%= carrito[i].nombre.substring(0,15) + "..." %>
-                                </b>
+
+                                <% if (carrito[i].nombre.length > 17) { %>
+                                    <b>
+                                        <%= carrito[i].nombre.substring(0,15) + "..." %>
+                                    </b>
+                                <%} else { %>
+                                    <b>
+                                        <%= carrito[i].nombre %>
+                                    </b>
+                                <% } %>
                                 <p>
-                                    <%= carrito[i].precio_total.toLocaleString("en", {style: "currency" ,currency: "MXN"
-                                        }); %>
+                                    <%= carrito[i].precio_total.toLocaleString("en", {style: "currency"
+                                        ,currency: "MXN" }); %>
                                 </p>
                             </div>
-                        <% } %>
+                            <% } %>
                     </div>
                     <div class="total">
                         <b>Total</b>

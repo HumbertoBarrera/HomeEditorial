@@ -90,7 +90,16 @@
                                 <span></span>
                             </div>
                             <div class="libdesc">
-                                <p><%= productos[i]['nombre'].substring(0,20) + "..." %></p>
+                                <% if (productos[i]['nombre'].length > 22) { %>
+                                    <p>
+                                        <%= productos[i]['nombre'].substring(0,20) + "..." %>
+                                    </p>
+                                <%} else { %>
+                                    <p>
+                                        <%= productos[i]['nombre'] %>
+                                    </p>
+                                <% } %>
+                               
                                 <p>$<%= productos[i]['precio'] %></p>
                                 <button onclick="return agregarItem('<%= productos[i].idProducto %>')">Añadir al carrito</button>
                             </div>
