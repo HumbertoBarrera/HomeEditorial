@@ -31,7 +31,7 @@ td {
 .multi {
     display: flex;
     align-items: center;
-    align-content: center;
+    justify-content: center;
     padding: 10px;
     height: 92px;
 }
@@ -79,6 +79,15 @@ td {
     flex-direction: column;
 }
 
+/*Cantidad de libros sin flechase*/
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 input[type="number"] {
-    text-align: end;
+    text-align: center;
+    -moz-appearance: textfield;
 }

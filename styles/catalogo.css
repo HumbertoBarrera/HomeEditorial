@@ -66,6 +66,8 @@
     width: auto;
     max-width: 200px;
     margin: 5px;
+    aspect-ratio: 7/9;
+    object-fit: contain;
 }
 
 .libro button {
@@ -84,10 +86,6 @@
 
 .libro button:active {
     background-color: darkgreen;
-}
-
-.cover {
-    height: 308px;
 }
 
 @media only screen and (max-width: 800px) {
