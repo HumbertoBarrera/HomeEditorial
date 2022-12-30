@@ -29,11 +29,11 @@ class CarritoController {
                     dato.cantidad += 1;
                     dato.precio_total = dato.cantidad * dato.precio;
                     carrito[pos] = dato;
-                    req.session.precioTotal = req.session.precioTotal + dato.precio_total;
+                    req.session.precioTotal += dato.precio;
                 }
             }
             req.session.carrito = carrito;
-            console.log(req.session.carrito);
+            console.log(req.session.precioTotal);
             res.status(200).json(req.session.carrito)
         });
 
@@ -44,14 +44,16 @@ class CarritoController {
         var external = req.params.external;
         var pos = CarritoController.verificar(carrito, external);
         var dato = carrito[pos];
-        if (dato.camtidad > 1){
+        console.log(dato.cantidad)
+        if (dato.cantidad > 1){
             dato.cantidad -= 1;
-            dato.precio_total = dato.camtidad * dato.precio;
+            dato.precio_total = dato.cantidad * dato.precio;
             carrito[pos] = dato;
             req.session.carrito = carrito;
-            req.session.precioTotal -= dato.precio_total;
+            req.session.precioTotal -= dato.precio;
             res.status(200).json(req.session.carrito);
         }else{
+            req.session.precioTotal -= dato.precio;
             var aux = [];
             for (var i = 0; i < carrito.length; i++){
                 var items = carrito[i];

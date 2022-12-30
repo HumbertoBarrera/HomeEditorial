@@ -8,7 +8,7 @@ const carritoController = new CarritoController();
 router.get('/agregar:external', carritoController.agregarItem);
 
 // Quitar item
-router.get('/qitar:external', carritoController.quitarItem);
+router.get('/quitar:external', carritoController.quitarItem);
 
 // Mostrar carrito
 router.get('/listarcarrito', carritoController.mostrarCarrito);
