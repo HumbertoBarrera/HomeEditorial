@@ -10,6 +10,9 @@ router.get('/agregar:external', carritoController.agregarItem);
 // Quitar item
 router.get('/quitar:external', carritoController.quitarItem);
 
+// Eliminar item
+router.get('/eliminar:external', carritoController.eliminarItem);
+
 // Mostrar carrito
 router.get('/listarcarrito', carritoController.mostrarCarrito);
 

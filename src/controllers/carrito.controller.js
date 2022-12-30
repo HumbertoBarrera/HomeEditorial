@@ -44,7 +44,6 @@ class CarritoController {
         var external = req.params.external;
         var pos = CarritoController.verificar(carrito, external);
         var dato = carrito[pos];
-        console.log(dato.cantidad)
         if (dato.cantidad > 1){
             dato.cantidad -= 1;
             dato.precio_total = dato.cantidad * dato.precio;
@@ -60,6 +59,23 @@ class CarritoController {
                 if (items.external != external){
                     aux.push(items);
                 }
+            }
+        }
+        req.session.carrito = aux;
+        res.status(200).json(req.session.carrito);
+    }
+
+    eliminarItem(req, res) {
+        var carrito = req.session.carrito;
+        var external = req.params.external;
+        var pos = CarritoController.verificar(carrito, external);
+        var dato = carrito[pos];
+        req.session.precioTotal -= dato.precio_total;
+        var aux = [];
+        for (var i = 0; i < carrito.length; i++){
+            var items = carrito[i];
+            if (items.external != external){
+                aux.push(items);
             }
         }
         req.session.carrito = aux;
