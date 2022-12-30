@@ -35,6 +35,10 @@
             }); 
             return false;
         }
+
+        function login(){
+            location.href = '/iniciar_sesion';
+        }
     </script>
     <header id="headerArea">
         <%- include('./shared/nav'); -%>
@@ -101,7 +105,11 @@
                                 <% } %>
                                
                                 <p>$<%= productos[i]['precio'] %></p>
-                                <button onclick="return agregarItem('<%= productos[i].idProducto %>')">Añadir al carrito</button>
+                                <% if (userLogged) { %>
+                                    <button onclick="return agregarItem('<%= productos[i].idProducto %>')">Añadir al carrito</button>
+                                <% }else{ %>
+                                    <button onclick="login()">Inicia sesión para comprar</button>
+                                <% } %>
                             </div>
                         </div>
                     <% } %>

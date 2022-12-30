@@ -25,7 +25,6 @@ class CarritoController {
                     carrito.push(datos);
                 }else{
                     var dato = carrito[pos];
-                    console.log(dato);
                     dato.cantidad += 1;
                     dato.precio_total = dato.cantidad * dato.precio;
                     carrito[pos] = dato;
@@ -33,7 +32,6 @@ class CarritoController {
                 }
             }
             req.session.carrito = carrito;
-            console.log(req.session.precioTotal);
             res.status(200).json(req.session.carrito)
         });
 

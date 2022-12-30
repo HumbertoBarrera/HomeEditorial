@@ -81,7 +81,8 @@ app.get('/micuenta', (req, res) => {
 	if (req.session.loggedIn) {
 		res.render('cuenta', {userLogged: req.session.loggedIn, user: req.session.user, direcciones: req.session.direcciones, metodospago: req.session.metodospago})
 	}else{
-		res.render('login', {userLogged: req.session.loggedIn, user: req.session.user})
+		// res.render('login', {userLogged: req.session.loggedIn, user: req.session.user})
+		res.redirect('/iniciar_sesion')
 	}
 });
 
@@ -92,7 +93,8 @@ app.get('/mispedidos', (req, res) => {
 			res.render('pedidos', { userLogged: req.session.loggedIn, user: req.session.user, envios: req.session.envios , pedido: data });
 		})
 	} else {
-		res.render('login', { userLogged: req.session.loggedIn, user: req.session.user })
+		// res.render('login', { userLogged: req.session.loggedIn, user: req.session.user })
+		res.redirect('/iniciar_sesion')
 	}
 });
 
@@ -111,8 +113,6 @@ app.get('/catalogo', (req, res) => {
 		req.session.carrito = [];
 	}
 	pool.execute('SELECT * FROM producto').then(([data, fields]) => {
-		// console.log(data[0].idProducto)
-		// exit()
 		res.render('catalogo', {userLogged: req.session.loggedIn, user: req.session.user, productos: data});
 	})
 });
