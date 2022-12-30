@@ -29,7 +29,7 @@
 
 .catalogo {
     width: 70%;
-    height: 500px;
+    height: 80vh;
 }
 
 #pagser {
@@ -45,7 +45,7 @@
     flex-wrap: wrap;
     overflow-y: scroll;
     height: auto;
-    max-height: 500px;
+    max-height: 80vh;
     padding: 10px;
 }
 
