@@ -13,7 +13,7 @@ import ventasRoutes from './routes/ventas.routes.js';
 import enviosRoutes from './routes/envios.router.js';
 import ordenRoutes from './routes/orden.routes.js';
 import pingRoute from './routes/ping.routes.js';
-import carritoRoute from './routes/carrito.routes.js'
+import carritoRoute from './routes/carrito.routes.js';
 import { exit } from 'process';
 
 const app = express();

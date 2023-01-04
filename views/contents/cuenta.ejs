@@ -20,6 +20,28 @@
 </head>
 
 <body>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#btnNuvDire').click(function(){
+               var datos= $('#fmrDireccionNueva').serialize();
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: json_encode(datos),
+                    success: function(r){
+                        if(r==1){
+                            alert("Direccion añadida");
+                        }else{
+                            alert("No se agrego la direccion")
+                        }
+
+                    },
+                });
+                return false;
+            });
+        });
+    </script>
+
     <header id="headerArea">
         <%- include('./shared/nav'); -%>
     </header>
@@ -166,35 +188,35 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form>
+                            <form  id="fmrDireccionNueva" method="post">
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label">Nombre completo:</label>
-                                    <input type="text" class="form-control" id="nombre" placeholder="John Doe">
+                                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="John Doe">
                                 </div>
                                 <div class="mb-3">
                                     <label for="call" class="form-label">Calle:</label>
-                                    <input type="text" class="form-control" id="call" placeholder="Calle venado">
+                                    <input type="text" class="form-control" id="call" name="call" placeholder="Calle venado">
                                 </div>
                                 <div class="mb-3">
                                     <label for="Num" class="form-label">Numero:</label>
-                                    <input type="text" class="form-control" id="Num" placeholder="96">
+                                    <input type="text" class="form-control" id="Num" name="Num" placeholder="96">
                                 </div>
                                 <div class="mb-3">
                                     <label for="codigo" class="form-label">Código Postal:</label>
-                                    <input type="text" class="form-control" id="codigo" placeholder="12345">
+                                    <input type="text" class="form-control" id="codigo" name="codigo" placeholder="12345">
                                 </div>
                                 <div class="mb-3">
                                     <label for="numero" class="form-label">Numero de telefono:</label>
-                                    <input type="text" class="form-control" id="numero" placeholder="4422669988">
+                                    <input type="text" class="form-control" id="numero" name="numero" placeholder="4422669988">
                                 </div>
                                 <div class="mb-3">
                                     <label for="insEnvio" class="form-label">Instrucciones de entrega:</label>
-                                    <textarea class="form-control" id="insEnvio" rows="2"></textarea>
+                                    <textarea class="form-control" id="insEnvio" name="insEnvio" rows="2"></textarea>
                                 </div>
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">Agregar dirección</button>
+                            <button type="button" id="btnNuvDire" class="btn btn-primary">Agregar dirección</button>
                         </div>
                     </div>
                 </div>
