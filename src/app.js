@@ -134,7 +134,7 @@ app.get('/mispedidos', (req, res) => {
 
 // Pago
 app.get('/pago', (req, res) => {
-	res.render('mispagos', { userLogged: req.session.loggedIn, user: req.session.user, carrito: req.session.carrito, precioTotal: req.session.precioTotal, direccionActiva: req.session.direccionActiva})
+	res.render('mispagos', { userLogged: req.session.loggedIn, user: req.session.user, carrito: req.session.carrito, precioTotal: req.session.precioTotal, direcciones: req.session.direcciones, metodospago: req.session.metodospago, direccionActiva: req.session.direccionActiva, metodopagoActivo: req.session.metodopagoActivo})
 });
 
 app.use((req, res, next) => {

@@ -35,6 +35,7 @@ export const getLogin = async (req, res) => {
                 }
             }else{
                 req.session.direcciones = [];
+                req.session.direccionActiva = null
             }
             if (row_metodopago.length > 0){
                 var metodospago = [];
@@ -43,8 +44,14 @@ export const getLogin = async (req, res) => {
                     metodospago.push(metodopago);
                 }
                 req.session.metodospago = metodospago;
+                req.session.metodopagoActivo = {
+                    nombre: row_metodopago[0].nombre,
+                    numTarjeta: row_metodopago[0].numTarjeta,
+                    fecha_vencimiento: row_metodopago[0].fechaVen
+                }
             }else{
                 req.session.metodospago = [];
+                req.session.metodopagoActivo = null
             }
             if(req.session.rol == 'C') {
                 res.redirect('/');

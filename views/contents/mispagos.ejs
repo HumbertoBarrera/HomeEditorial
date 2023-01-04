@@ -61,14 +61,14 @@
             <div class="contGran">
                 <div class="envioNav">
                     <ul>
-                        <li id="dir" class="navCont active" onclick="abrirContNav(event, 'direccion')">
-                            <p>Direccion de envio</p>
+                        <li id="dir" style="cursor:pointer;" class="navCont active" onclick="abrirContNav(event, 'direccion')">
+                            <p>Dirección de envío</p>
                         </li>
-                        <li id="pag" class="navCont" onclick="abrirContNav(event, 'pago')">
+                        <li id="pag" style="cursor:pointer;" class="navCont" onclick="abrirContNav(event, 'pago')">
                             <p>Forma de pago</p>
                         </li>
-                        <li id="con" class="navCont">
-                            <p>Confirmacion</p>
+                        <li id="con" style="cursor:pointer;" class="navCont">
+                            <p>Confirmación</p>
                         </li>
                     </ul>
                 </div>
@@ -77,30 +77,38 @@
 
                 <div class="opEnvio" id="direccion" style="display: block;">
                     <div class="opText">
-                        <div class="contenido">
-                            <b>Dirección</b>
-                        </div>
-                        <div id="dirSelecc" class="contenido">
-                            <p>
-                                <%= direccionActiva.direccion %>
-                            </p>
-                        </div>
-                        <div class="contenido">
-                            <a class="link" onclick="abrirCont(event, 'opDireccion')">Cambiar</a>
-                        </div>
-                    </div>
-                    <div class="opText">
-                        <% if (direccionActiva.instrucciones) { %>
+                        <% if (direccionActiva != null) { %>
                             <div class="contenido">
-                                <b>Instrucciones de entrega</b>
-                                <p id="insEntrega">
-                                    <%= direccionActiva.instrucciones %>
+                                <b>Dirección</b>
+                            </div>
+                            <div id="dirSelecc" class="contenido">
+                                <p>
+                                    <%= direccionActiva.direccion %>
                                 </p>
                             </div>
+                            <div class="contenido">
+                                <a class="link" style="cursor:pointer;" onclick="abrirCont(event, 'opDireccion')">Cambiar</a>
+                            </div>
+                        <% }else{ %>
+                            <div class="contenido">
+                                <b>¡No tienes una direcciones registrada!</b>
+                            </div>
+                            <div class="contenido">
+                                <a class="link" style="cursor:pointer;" onclick="abrirCont(event, 'opDireccion')">Aquí quiero poner el botón de agregar una nueva dirección :(</a>
+                            </div>
+                        <% } %>
+                    </div>
+                    <div class="opText">
+                        <% if (direccionActiva != null) { %>
+                            <% if (direccionActiva.instrucciones) { %>
+                                <div class="contenido">
+                                    <b>Instrucciones de entrega</b>
+                                    <p id="insEntrega">
+                                        <%= direccionActiva.instrucciones %>
+                                    </p>
+                                </div>
                             <% } %>
-                                <!-- <div class="contenido">
-                            <a class="link" data-bs-toggle="modal" data-bs-target="#nueDireccion">Cambiar</a>
-                        </div> -->
+                        <% } %>
                     </div>
                     <div class="opText">
                         <div class="contenido">
@@ -121,7 +129,21 @@
 
                 <div class="opEnvio" id="opDireccion">
                     <div class="opText">
-                        <div class="contenido">
+                        <% if (direcciones.length > 0) { %>
+                            <% for (let i = 0; i < direcciones.length; i++) { %>
+                                <form>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                            id="flexRadioDefault1">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            <p><%= direcciones[i].direccion %></p>
+                                            <p><%= direcciones[i].instrucciones_direccion %></p>
+                                        </label>
+                                    </div>
+                                </form>
+                            <% } %>
+                        <% } %>
+                        <!-- <div class="contenido">
                             <form>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="flexRadioDefault"
@@ -137,7 +159,7 @@
                                     </label>
                                 </div>
                             </form>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="opText">
                         <p> <img src="https://cdn-icons-png.flaticon.com/512/32/32563.png" alt="" height="10px"> <a
@@ -156,7 +178,45 @@
 
                 <div class="opEnvio" id="pago">
                     <div class="opText">
-                        <div class="contenido">
+                        <% if (metodopagoActivo != null) { %>
+                            <div class="contenido">
+                                <div class="opText">
+                                    <div class="contenido">
+                                        <b>Nombre en Tarjeta</b>
+                                    </div>
+                                    <div id="nomTar" class="contenido">
+                                        <p><%= metodopagoActivo.nombre %></p>
+                                    </div>
+                                </div>
+                                <div class="opText">
+                                    <div class="contenido">
+                                        <b>Numero de Tarjeta</b>
+                                    </div>
+                                    <div id="numTar" class="contenido">
+                                        <p><%= metodopagoActivo.numTarjeta %></p>
+                                    </div>
+                                </div>
+                                <div class="opText">
+                                    <div class="contenido">
+                                        <b>Vencimiento</b>
+                                    </div>
+                                    <div class="contenido">
+                                        <p id="venc"><%= metodopagoActivo.fecha_vencimiento %></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="contenido">
+                                <a class="link" style="cursor:pointer;" onclick="abrirCont(event, 'opPago')">Cambiar</a>
+                            </div>
+                        <% }else{ %>
+                            <div class="contenido">
+                                <b>¡No tienes métodos de pago registrados!</b>
+                            </div>
+                            <div class="contenido">
+                                <a class="link" style="cursor:pointer;" onclick="abrirCont(event, 'opDireccion')">Aquí quiero poner el botón de agregar un nuevo método de pago :(</a>
+                            </div>
+                        <% } %>
+                        <!-- <div class="contenido">
                             <div class="opText">
                                 <div class="contenido">
                                     <b>Nombre en Tarjeta</b>
@@ -189,10 +249,7 @@
                                     <p id="cvv">911</p>
                                 </div>
                             </div>
-                        </div>
-                        <div class="contenido">
-                            <a class="link" onclick="abrirCont(event, 'opPago')">Cambiar</a>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="opText">
                         <div class="contenido">
@@ -308,16 +365,28 @@
                                 <input type="text" class="form-control" id="nombre" placeholder="John Doe">
                             </div>
                             <div class="mb-3">
-                                <label for="callNum" class="form-label">Calle y numero:</label>
-                                <input type="text" class="form-control" id="callNum" placeholder="Calle venado #96">
+                                <label for="callNum" class="form-label">Calle:</label>
+                                <input type="text" class="form-control" id="callNum" placeholder="Calle venado">
+                            </div>
+                            <div class="mb-3">
+                                <label for="callNum" class="form-label">Número:</label>
+                                <input type="text" class="form-control" id="callNum" placeholder="99">
+                            </div>
+                            <div class="mb-3">
+                                <label for="callNum" class="form-label">Colonia:</label>
+                                <input type="text" class="form-control" id="callNum" placeholder="Tecnológica">
                             </div>
                             <div class="mb-3">
                                 <label for="codigo" class="form-label">Código Postal:</label>
                                 <input type="text" class="form-control" id="codigo" placeholder="12345">
                             </div>
                             <div class="mb-3">
-                                <label for="numero" class="form-label">Numero de telefono:</label>
-                                <input type="text" class="form-control" id="numero" placeholder="4422669988">
+                                <label for="numero" class="form-label">Ciudad:</label>
+                                <input type="text" class="form-control" id="numero" placeholder="Hermosillo">
+                            </div>
+                            <div class="mb-3">
+                                <label for="numero" class="form-label">Estado:</label>
+                                <input type="text" class="form-control" id="numero" placeholder="Sonora">
                             </div>
                             <div class="mb-3">
                                 <label for="insEnvio" class="form-label">Instrucciones de entrega:</label>
@@ -339,7 +408,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Nuevo metodo de pago</h1>
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Nuevo método de pago</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -349,11 +418,11 @@
                                 <input type="text" class="form-control" id="nombreTar" placeholder="John Doe">
                             </div>
                             <div class="mb-3">
-                                <label for="numTar" class="form-label">Numero de tarjeta:</label>
+                                <label for="numTar" class="form-label">Número de tarjeta:</label>
                                 <input type="text" class="form-control" id="numTar" placeholder="7777 8888 9999 5555">
                             </div>
                             <div class="mb-3">
-                                <label for="venci" class="form-label">Vencimiento:</label>
+                                <label for="venci" class="form-label">Fecha de vencimiento:</label>
                                 <input type="text" class="form-control cort" id="venci" placeholder="12/22">
                             </div>
                             <div class="mb-3">
