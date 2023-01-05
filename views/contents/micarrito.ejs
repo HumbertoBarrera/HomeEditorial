@@ -22,8 +22,8 @@
     <script>
         function item(external, tipo){
             console.log(external, tipo)
-            var url = 'http://localhost:3000/agregar' + external;
-            var url = (tipo == 1) ? 'http://localhost:3000/quitar' + external : url;
+            var url = 'https://homeeditorial-production.up.railway.app/agregar' + external;
+            var url = (tipo == 1) ? 'https://homeeditorial-production.up.railway.app/quitar' + external : url;
             $.ajax({
                 url: url,
                 type: 'GET',
@@ -38,7 +38,7 @@
 
         function eliminarItem(external, tipo){
             console.log(external, tipo)
-            var url = 'http://localhost:3000/eliminar' + external;
+            var url = 'https://homeeditorial-production.up.railway.app/eliminar' + external;
             $.ajax({
                 url: url,
                 type: 'GET',

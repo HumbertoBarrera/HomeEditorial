@@ -349,7 +349,7 @@
 
             function generarPedido(idCliente, carrito, idMovimiento){
                 const IVA = 16;
-                var url = 'http://localhost:3000/api/pedidos' + idCliente;
+                var url = 'https://homeeditorial-production.up.railway.app/api/pedidos' + idCliente;
                 $.post(url, {Carrito: JSON.parse(carrito), Total: '<%= precioTotal %>'}, function(returnedData){
                     console.log(returnedData);
                     alert('Pedido registrado exitosamente');
@@ -361,7 +361,7 @@
             };
 
             function registrarVenta(idMovimiento, idPedido, idMetodoPago, carrito){
-                var url = 'http://localhost:3000/api/ventas';
+                var url = 'https://homeeditorial-production.up.railway.app/api/ventas';
                 var date = new Date();
                 var dd = date.getDate() + 5;
                 var mm = date.getMonth();
