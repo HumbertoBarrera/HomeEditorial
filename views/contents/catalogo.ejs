@@ -103,7 +103,6 @@
                                         <%= productos[i]['nombre'] %>
                                     </p>
                                 <% } %>
-                               
                                 <p>$<%= productos[i]['precio'] %></p>
                                 <% if (userLogged) { %>
                                     <button onclick="return agregarItem('<%= productos[i].idProducto %>')">Añadir al carrito</button>

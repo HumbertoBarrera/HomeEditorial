@@ -309,55 +309,40 @@
                 // http://www.itbank.somee.com/api/Usuarios/Transferencia/2456326554876666,09%2F25,695,2852326554876598,400.35
                 const fecha_vencimiento = fechaVen.split("/");
                 var url = 'http://www.itbank.somee.com/api/Usuarios/Transferencia/' + cuentaOrigen + ',' + fecha_vencimiento[0] + '%2F' + fecha_vencimiento[1] + ',' + token + ',' + '1380990729478099' + ',' + monto;
-                // $.ajax({
-                //     url: url,
-                //     type: 'POST',
-                //     dataType: 'json',
-                //     success: function(data, textStatus, jqXHR){
-                //         alert('Venta registrada con éxito');
-                //         generarPedido('<%= user.id %>', carrito);
-                //         // verCarrito(JSON.parse(carrito))
-                //     }, error: function(jqXHR, textStatus, errorThrown){
-                //         console.log(jqXHR);
-                //         console.log('No funcionó la conexión con banco');
-                //     }
-                // });
                 $.post(url, '', function(returnedData){
                     console.log(returnedData)
                     alert('Venta realizada exitosamente.');
-                    generarPedido('<%= user.id %>', carrito);
+                    generarPedido('<%= user.id %>', carrito, returnedData.response.iD_Movimiento);
                 }).fail(function(){
-                    console.log('Conexión con banco fallida.')
+                    console.log('Conexión con banco fallida.');
                 })
                 return false;
-            }
+            };
 
-            function generarPedido(idCliente, carrito){
+            function generarPedido(idCliente, carrito, idMovimiento){
                 const IVA = 16;
                 var url = 'http://localhost:3000/api/pedidos' + idCliente;
                 $.post(url, {Carrito: JSON.parse(carrito), Total: '<%= precioTotal %>'}, function(returnedData){
-                    alert(returnedData);
+                    console.log(returnedData);
+                    alert('Pedido registrado exitosamente');
+                    registrarVenta(idMovimiento, returnedData.Pedido, '<%= metodopagoActivo.id %>');
                 }).fail(function(returnedData){
                     console.log(returnedData);
                 })
-                // $.ajax({
-                //     url: url,
-                //     type: 'POST',
-                //     dataType: 'json',
-                //     data: carrito,
-                //     success: function(data, textStatus, jqXHR){
-                //         alert('Pedido realizado con éxito');
-                //     }, error: function(jqXHR, textStatus, errorThrown){
-                //         console.log(jqXHR);
-                //         console.log('No funcionó la conexión con pedidos');
-                //     }
-                // });
                 return false;
-            }
+            };
 
-            function verCarrito(carrito){
-                console.log(carrito)
-            }
+            function registrarVenta(idMovimiento, idPedido, idMetodoPago){
+                var url = 'http://localhost:3000/api/ventas';
+                var date = new Date();
+                $.post(url, {fecha: date.toISOString().substring(0, 10), movimiento: idMovimiento, idMetodoPago: idMetodoPago, idPedido: idPedido}, function(returnedData){
+                    console.log(returnedData);
+                    alert('Venta registrada correctamente.')
+                    location.href = '/';
+                }).fail(function(returnedData){
+                    console.log('Error al registrar venta.');
+                })
+            };
 
         </script>
 
