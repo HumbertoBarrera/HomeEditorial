@@ -91,7 +91,7 @@
                             </div>
                         <% }else{ %>
                             <div class="contenido">
-                                <b>¡No tienes una direcciones registrada!</b>
+                                <b>¡No tienes una direcciones registradas!</b>
                             </div>
                             <div class="contenido">
                                 <a class="link" style="cursor:pointer;" onclick="abrirCont(event, 'opDireccion')">Aquí quiero poner el botón de agregar una nueva dirección :(</a>
@@ -131,35 +131,20 @@
                     <div class="opText">
                         <% if (direcciones.length > 0) { %>
                             <% for (let i = 0; i < direcciones.length; i++) { %>
-                                <form>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                            id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            <p><%= direcciones[i].direccion %></p>
-                                            <p><%= direcciones[i].instrucciones_direccion %></p>
-                                        </label>
-                                    </div>
-                                </form>
+                                <div class="contenido">
+                                    <form>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                                id="flexRadioDefault1">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                <p><%= direcciones[i].direccion %></p>
+                                                <p><%= direcciones[i].instrucciones_direccion %></p>
+                                            </label>
+                                        </div>
+                                    </form>
+                                </div>
                             <% } %>
                         <% } %>
-                        <!-- <div class="contenido">
-                            <form>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                        id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores ea quaerat
-                                            esse aut saepe quos, enim
-                                            dicta rerum. Totam ipsum iusto quia reprehenderit quis asperiores modi!
-                                            Sapiente nemo doloremque
-                                            tempore.</p>
-                                        <p>Ejemplo</p>
-                                        <p>Ejemplo</p>
-                                    </label>
-                                </div>
-                            </form>
-                        </div> -->
                     </div>
                     <div class="opText">
                         <p> <img src="https://cdn-icons-png.flaticon.com/512/32/32563.png" alt="" height="10px"> <a
@@ -216,40 +201,6 @@
                                 <a class="link" style="cursor:pointer;" onclick="abrirCont(event, 'opDireccion')">Aquí quiero poner el botón de agregar un nuevo método de pago :(</a>
                             </div>
                         <% } %>
-                        <!-- <div class="contenido">
-                            <div class="opText">
-                                <div class="contenido">
-                                    <b>Nombre en Tarjeta</b>
-                                </div>
-                                <div id="nomTar" class="contenido">
-                                    <p>John Doe</p>
-                                </div>
-                            </div>
-                            <div class="opText">
-                                <div class="contenido">
-                                    <b>Numero de Tarjeta</b>
-                                </div>
-                                <div id="numTar" class="contenido">
-                                    <p>XXXX XXXX XXXX 4859</p>
-                                </div>
-                            </div>
-                            <div class="opText">
-                                <div class="contenido">
-                                    <b>Vencimiento</b>
-                                </div>
-                                <div class="contenido">
-                                    <p id="venc">12/22</p>
-                                </div>
-                            </div>
-                            <div class="opText">
-                                <div class="contenido">
-                                    <b>Código de seguridad (CVV)</b>
-                                </div>
-                                <div class="contenido">
-                                    <p id="cvv">911</p>
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
                     <div class="opText">
                         <div class="contenido">
@@ -265,19 +216,23 @@
 
                 <div class="opEnvio" id="opPago">
                     <div class="opText">
-                        <div class="contenido">
-                            <form>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                        id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        <p>John Doe</p>
-                                        <p>XXXX XXXX XXXX 9859</p>
-                                        <p>12/22</p>
-                                    </label>
+                        <% if (metodospago.length > 0) { %>
+                            <% for (let i=0; i < metodospago.length; i++){ %>
+                                <div class="contenido">
+                                    <form>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                                id="flexRadioDefault1">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                <p><%= metodospago[i].nombre %></p>
+                                                <p><%= metodospago[i].numTarjeta %></p>
+                                                <p><%= metodospago[i].fechaVen %></p>
+                                            </label>
+                                        </div>
+                                    </form>
                                 </div>
-                            </form>
-                        </div>
+                            <% } %>
+                        <% } %>
                     </div>
                     <div class="opText">
                         <p> <img src="https://cdn-icons-png.flaticon.com/512/32/32563.png" alt="" height="10px"> <a
@@ -326,7 +281,7 @@
                     </div>
                     <div class="opText">
                         <div class="contenido">
-                            <b>Numero de Tarjeta</b>
+                            <b>Número de Tarjeta</b>
                         </div>
                         <div id="numTarFin" class="contenido">
 
@@ -336,15 +291,34 @@
                         <div class="contenido">
                         </div>
                         <div class="contenido">
-                            <button>Aceptar</button>
+                            <button onclick="return conexionBanco('<%= metodopagoActivo.numTarjeta %>', '<%= metodopagoActivo.fecha_vencimiento %>', '<%= metodopagoActivo.token %>', parseInt('<%= precioTotal %>'))">Aceptar</button>
                         </div>
                     </div>
                 </div>
 
 
             </div>
-
-
+        
+        <script>
+            function conexionBanco(cuentaOrigen, fechaVen, token, monto){
+                // http://www.itbank.somee.com/api/Usuarios/Transferencia/CuentaOrigen,FechaVencimiento,Token,CuentaDestino,Monto
+                // http://www.itbank.somee.com/api/Usuarios/Transferencia/2456326554876666,09%2F25,695,2852326554876598,400.35
+                const fecha_vencimiento = fechaVen.split("/")
+                var url = 'http://www.itbank.somee.com/api/Usuarios/Transferencia/' + cuentaOrigen + ',' + fecha_vencimiento[0] + '%2F' + fecha_vencimiento[1] + ',' + token + ',' + '1380990729478099' + ',' + monto;
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function(data, textStatus, jqXHR){
+                        alert('Pedido realizado con éxito')
+                    }, error: function(jqXHR, textStatus, errorThrown){
+                        console.log(jqXHR);
+                        console.log('No jaló la conexión')
+                    }
+                });
+                return false;
+            }
+        </script>
 
         </main>
 

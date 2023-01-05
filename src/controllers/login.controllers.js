@@ -47,7 +47,8 @@ export const getLogin = async (req, res) => {
                 req.session.metodopagoActivo = {
                     nombre: row_metodopago[0].nombre,
                     numTarjeta: row_metodopago[0].numTarjeta,
-                    fecha_vencimiento: row_metodopago[0].fechaVen
+                    fecha_vencimiento: row_metodopago[0].fechaVen,
+                    token: row_metodopago[0].cvv
                 }
             }else{
                 req.session.metodospago = [];

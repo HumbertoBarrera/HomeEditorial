@@ -54,38 +54,12 @@ export const getPedido = async (req, res) => {
 
 export const createPedido = async (req, res) => {
     try{
-        const {subtotal, iva, total, fecha, idCliente} = req.body;
-        const [rows] = await pool.query('INSERT INTO pedido (subtotal, iva, total, fecha, idCliente) VALUES (?, ?, ?, ?, ?)', 
-                        [subtotal, iva, total, fecha, idCliente]);
-        for(var key in carrito){
-            var value = carrito[key]
-            value['monto'] = value['precio'] * value['cantidad'];
-            value['iva'] = value['monto'] * (16/100);
-        }
-        res.send({
-            id: rows.insertId,
-            subtotal,
-            iva,
-            total,
-            fecha,
-            idCliente
-        });
-    }catch (error){
-        return res.status(500).json({
-            message: 'Algo salió mal'
-        })
-    }
-}
-
-//
-export const createPedido2 = async (req, res) => {
-    try{
         var montoTotal = 0;
         var ivaTotal = 0;
-        const {idCliente} = req.body;
+        const {subtotal, iva, total, fecha, idCliente} = req.body;
         const [row_pedido] = await pool.query('INSERT INTO pedido (idCliente) VALUES (?)', [idCliente]);
-        for(var key in carrito){
-            var value = carrito[key]
+        for(var key in req.body){
+            var value = req.body[key]
             value['monto'] = value['precioUni'] * value['cantidad'];
             value['ivaProd'] = value['monto'] * (16/100);
         }
@@ -98,9 +72,9 @@ export const createPedido2 = async (req, res) => {
             ivaTotal += ivaProd;
         }
         var date = new Date();
-        var total = montoTotal + ivaTotal;
+        var total_ = montoTotal + ivaTotal;
         const [row_pedido_final] = await pool.query('UPDATE pedido SET subtotal = ?, iva = ?, total = ?, fecha = ? WHERE idPedido = ?',
-                                                    [montoTotal, ivaTotal, total, date, row_pedido.insertId]);
+                                                    [montoTotal, ivaTotal, total_, date, row_pedido.insertId]);
         res.send({
             Pedido: row_pedido.insertId,
             message: 'Pedido realizado con éxito.'
