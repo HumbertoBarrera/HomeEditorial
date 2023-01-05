@@ -8,7 +8,7 @@ router.get('/pedidos', getPedidos)
 
 router.get('/pedidos/:id', getPedido)
 
-router.post('/pedidos', createPedido)
+router.post('/pedidos:idCliente', createPedido)
 
 router.post('/pedidoVO', createPedido_VO)
 

@@ -17,9 +17,10 @@ export const getEnvios = async (req, res) => {
                 envios.push(envio);
             }
             req.session.envios = envios;
-            console.log(req.session.envios);
+            // console.log(req.session.envios);
         }
-        res.redirect('/');
+        // res.redirect('/');
+        res.json(rows);
     }catch (error){
         return res.status(500).json({
             message: 'Algo salió mal'

@@ -56,19 +56,22 @@ export const createPedido = async (req, res) => {
     try{
         var montoTotal = 0;
         var ivaTotal = 0;
-        const {subtotal, iva, total, fecha, idCliente} = req.body;
+        const IVA = 16;
+        const idCliente = req.params.idCliente;
         const [row_pedido] = await pool.query('INSERT INTO pedido (idCliente) VALUES (?)', [idCliente]);
-        for(var key in req.body){
-            var value = req.body[key]
-            value['monto'] = value['precioUni'] * value['cantidad'];
-            value['ivaProd'] = value['monto'] * (16/100);
-        }
-        for (var key in carrito){
-            var orden = carrito[key];
-            const {idProducto, precioUni, cantidad, monto, ivaProd} = orden;
+        // for(var key in req.body){
+        //     var value = req.body[key]
+        //     value['monto'] = value['precioUni'] * value['cantidad'];
+        //     value['ivaProd'] = value['monto'] * (16/100);
+        // }
+        for (var key in req.body){
+            var orden = req.body[key];
+            console.log(orden);
+            const {id, precio, cantidad, precio_total} = orden;
+            var ivaProd = precio * (IVA/100);
             const [row_orden] = await pool.query('INSERT INTO orden (idPedido, idProducto, precioUni, cantidad, monto, iva) VALUES (?, ?, ?, ?, ?, ?)',
-                                [row_pedido.insertId, idProducto, precioUni, cantidad, monto, ivaProd]);
-            montoTotal += monto;
+                                [row_pedido.insertId, id, precio, cantidad, precio_total, ivaProd]);
+            montoTotal += precio_total;
             ivaTotal += ivaProd;
         }
         var date = new Date();

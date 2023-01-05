@@ -24,12 +24,15 @@
                     aria-label="Search">
                 <button id="searchBut" class="btn btn-outline-success" type="submit">Buscar</button>
             </form>
-            <button onclick='location.href="/micarrito"' class="brl-butt"><img src="/cart.png"alt="" width="30px">
-                <span id="cant"></span>
-            </button>
             <% if (userLogged) { %>
+                <button onclick='location.href="/micarrito"' class="brl-butt"><img src="/cart.png"alt="" width="30px">
+                    <span id="cant"></span>
+                </button>
                 <a class="login" href="/micuenta"><%= user.nombre %></a>
             <% } else { %>
+                <button onclick='location.href="/iniciar_sesion"' class="brl-butt"><img src="/cart.png"alt="" width="30px">
+                    <span id="cant"></span>
+                </button>
                 <a class="login" href="/iniciar_sesion">Iniciar Sesión</a>
             <% } %>
         </div>

@@ -295,7 +295,7 @@
                         <div class="contenido">
                         </div>
                         <div class="contenido">
-                            <button onclick="return conexionBanco('<%= metodopagoActivo.numTarjeta %>', '<%= metodopagoActivo.fecha_vencimiento %>', '<%= metodopagoActivo.token %>', parseInt('<%= precioTotal %>'))">Aceptar</button>
+                            <button onclick="return conexionBanco('<%= metodopagoActivo.numTarjeta %>', '<%= metodopagoActivo.fecha_vencimiento %>', '<%= metodopagoActivo.token %>', '<%= precioTotal %>', '<%= carrito %>')">Aceptar</button>
                         </div>
                     </div>
                 </div>
@@ -304,24 +304,49 @@
             </div>
         
         <script>
-            function conexionBanco(cuentaOrigen, fechaVen, token, monto){
+            function conexionBanco(cuentaOrigen, fechaVen, token, monto, carrito){
                 // http://www.itbank.somee.com/api/Usuarios/Transferencia/CuentaOrigen,FechaVencimiento,Token,CuentaDestino,Monto
                 // http://www.itbank.somee.com/api/Usuarios/Transferencia/2456326554876666,09%2F25,695,2852326554876598,400.35
-                const fecha_vencimiento = fechaVen.split("/")
+                const fecha_vencimiento = fechaVen.split("/");
                 var url = 'http://www.itbank.somee.com/api/Usuarios/Transferencia/' + cuentaOrigen + ',' + fecha_vencimiento[0] + '%2F' + fecha_vencimiento[1] + ',' + token + ',' + '1380990729478099' + ',' + monto;
                 $.ajax({
                     url: url,
                     type: 'POST',
                     dataType: 'json',
                     success: function(data, textStatus, jqXHR){
-                        alert('Pedido realizado con éxito')
+                        alert('Venta registrada con éxito');
+                        // generarPedido('<%= user.id %>', '<%= carrito[0] %>');
+                        verCarrito(JSON.parse(carrito))
                     }, error: function(jqXHR, textStatus, errorThrown){
                         console.log(jqXHR);
-                        console.log('No jaló la conexión')
+                        console.log('No funcionó la conexión con banco');
                     }
                 });
                 return false;
             }
+
+            function generarPedido(idCliente, carrito){
+                const IVA = 16;
+                var url = 'http://localhost:3000/api/pedidos' + idCliente;
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: carrito,
+                    success: function(data, textStatus, jqXHR){
+                        alert('Pedido realizado con éxito');
+                    }, error: function(jqXHR, textStatus, errorThrown){
+                        console.log(jqXHR);
+                        console.log('No funcionó la conexión con pedidos');
+                    }
+                });
+                return false;
+            }
+
+            function verCarrito(carrito){
+                console.log(carrito)
+            }
+
         </script>
 
         </main>
