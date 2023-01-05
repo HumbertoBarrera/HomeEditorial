@@ -30,6 +30,7 @@ export const getLogin = async (req, res) => {
                 }
                 req.session.direcciones = direcciones;
                 req.session.direccionActiva = {
+                    id: row_direccion[0].idDireccion,
                     direccion: row_direccion[0].Direccion,
                     instrucciones: row_direccion[0].Instrucciones
                 }
@@ -45,6 +46,7 @@ export const getLogin = async (req, res) => {
                 }
                 req.session.metodospago = metodospago;
                 req.session.metodopagoActivo = {
+                    id: row_metodopago[0].idMetodoPago,
                     nombre: row_metodopago[0].nombre,
                     numTarjeta: row_metodopago[0].numTarjeta,
                     fecha_vencimiento: row_metodopago[0].fechaVen,

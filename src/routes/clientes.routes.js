@@ -17,5 +17,4 @@ router.delete('/clientes', deleteClientes);
 
 router.post('/auth', getLogin);
 
-
 export default router

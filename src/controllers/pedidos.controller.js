@@ -86,7 +86,6 @@ export const createPedido = async (req, res) => {
         // }
         for (var key in req.body.Carrito){
             var orden = req.body.Carrito[key];
-            console.log(orden);
             const {id, precio, cantidad, precio_total} = orden;
             var ivaProd = precio * (IVA/100);
             const [row_orden] = await pool.query('INSERT INTO orden (idPedido, idProducto, precioUni, cantidad, monto, iva) VALUES (?, ?, ?, ?, ?, ?)',
