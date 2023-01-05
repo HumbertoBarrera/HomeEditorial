@@ -2,8 +2,6 @@ import { pool } from "../db.js"
 import Envio from '../../modelos/envio.modelo.js'
 import session from "express-session";
 
-
-
 export const getEnvios = async (req, res) => {
     try{
         const [rows] = await pool.query('SELECT * FROM envio')

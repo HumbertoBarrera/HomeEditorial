@@ -21,7 +21,26 @@ const carrito = [
 
 export const getPedidos = async (req, res) => {
     try{
-        const [rows] = await pool.query('SELECT * FROM pedido WHERE idCliente = ?', [req.body.idCliente])
+        const [rows] = await pool.query('SELECT * FROM pedido');
+        if (rows.length <= 0) return res.status(404).json({
+            message: 'No se encontró ningún pedido'
+        })
+        else {
+            for (let i = 0; i <= rows.length; i++) {
+                req.session.ped
+            }
+        }
+        res.json(rows)
+    }catch (error){
+        return res.status(500).json({
+            message: 'Algo salió mal'
+        })
+    }
+}
+
+export const getPedidosByID = async (req, res) => {
+    try{
+        const [rows] = await pool.query('SELECT * FROM pedido WHERE idCliente = ?', [req.params.idCliente])
         if (rows.length <= 0) return res.status(404).json({
             message: 'No se encontró ningún pedido'
         })
@@ -54,6 +73,7 @@ export const getPedido = async (req, res) => {
 
 export const createPedido = async (req, res) => {
     try{
+        // console.log(req.body.Carrito);
         var montoTotal = 0;
         var ivaTotal = 0;
         const IVA = 16;
@@ -64,18 +84,19 @@ export const createPedido = async (req, res) => {
         //     value['monto'] = value['precioUni'] * value['cantidad'];
         //     value['ivaProd'] = value['monto'] * (16/100);
         // }
-        for (var key in req.body){
-            var orden = req.body[key];
+        for (var key in req.body.Carrito){
+            var orden = req.body.Carrito[key];
             console.log(orden);
             const {id, precio, cantidad, precio_total} = orden;
             var ivaProd = precio * (IVA/100);
             const [row_orden] = await pool.query('INSERT INTO orden (idPedido, idProducto, precioUni, cantidad, monto, iva) VALUES (?, ?, ?, ?, ?, ?)',
                                 [row_pedido.insertId, id, precio, cantidad, precio_total, ivaProd]);
-            montoTotal += precio_total;
+            // montoTotal += precio_total;
             ivaTotal += ivaProd;
         }
         var date = new Date();
-        var total_ = montoTotal + ivaTotal;
+        montoTotal = parseFloat(req.body.Total) - parseFloat(ivaTotal);
+        var total_ = req.body.Total;
         const [row_pedido_final] = await pool.query('UPDATE pedido SET subtotal = ?, iva = ?, total = ?, fecha = ? WHERE idPedido = ?',
                                                     [montoTotal, ivaTotal, total_, date, row_pedido.insertId]);
         res.send({
