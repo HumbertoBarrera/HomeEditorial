@@ -314,7 +314,7 @@
                     alert('Venta realizada exitosamente.');
                     generarPedido('<%= user.id %>', carrito, returnedData.response.iD_Movimiento);
                 }).fail(function(){
-                    console.log('Conexión con banco fallida.');
+                    alert('Conexión con banco fallida. Vuelva a intentarlo más tarde.');
                 })
                 return false;
             };
@@ -325,24 +325,53 @@
                 $.post(url, {Carrito: JSON.parse(carrito), Total: '<%= precioTotal %>'}, function(returnedData){
                     console.log(returnedData);
                     alert('Pedido registrado exitosamente');
-                    registrarVenta(idMovimiento, returnedData.Pedido, '<%= metodopagoActivo.id %>');
+                    registrarVenta(idMovimiento, returnedData.Pedido, '<%= metodopagoActivo.id %>', carrito);
                 }).fail(function(returnedData){
-                    console.log(returnedData);
+                    alert('Error al registrar pedido. Vuelva a intentarlo.');
                 })
                 return false;
             };
 
-            function registrarVenta(idMovimiento, idPedido, idMetodoPago){
+            function registrarVenta(idMovimiento, idPedido, idMetodoPago, carrito){
                 var url = 'http://localhost:3000/api/ventas';
                 var date = new Date();
+                var dd = date.getDate() + 5;
+                var mm = date.getMonth();
+                var yyyy = date.getFullYear();
+                var fecha_entrega = yyyy + '-' + mm + '-' + dd;
                 $.post(url, {fecha: date.toISOString().substring(0, 10), movimiento: idMovimiento, idMetodoPago: idMetodoPago, idPedido: idPedido}, function(returnedData){
                     console.log(returnedData);
                     alert('Venta registrada correctamente.')
-                    location.href = '/';
+                    solicitarTransporte(returnedData.identificador_venta, '<%= user.nombre %>', '<%= direccionActiva.direccion %>', fecha_entrega, '<%= user.id %>', carrito);
+                    // location.href = '/';
                 }).fail(function(returnedData){
-                    console.log('Error al registrar venta.');
+                    alert('Error al registrar venta. Vuelva a intentarlo');
                 })
             };
+
+            function solicitarTransporte(idVenta, nombreDestinatario, direccionDestino, fechaEntrega, idCliente, carrito){
+                var url = 'https://transportes-ith-api-production.up.railway.app/api/solicitudes';
+                carrito = JSON.parse(carrito)
+                var productos = '';
+                for (let i=0; i < carrito.length; i++){
+                    productos += 'Libro ' + carrito[i].nombre + ', ';
+                }
+                json = {
+                    "numeroVenta": idVenta,
+                    "productos": productos,
+                    "nombreDestinatario": nombreDestinatario,
+                    "direccionDestino": direccionDestino,
+                    "fechaEntrega": fechaEntrega,
+                    "idCliente": idCliente
+                }
+                console.log(productos)
+                $.post(url, json, function(returnedData){
+                    alert('Transporte solicitado correctamente.');
+                    location.href = '/';
+                }).fail(function(returnedData){
+                    alert('Error al solicitar transporte.');
+                })
+            }
 
         </script>
 
