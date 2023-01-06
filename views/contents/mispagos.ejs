@@ -336,13 +336,13 @@
                     // http://www.itbank.somee.com/api/Usuarios/Transferencia/CuentaOrigen,FechaVencimiento,Token,CuentaDestino,Monto
                     // http://www.itbank.somee.com/api/Usuarios/Transferencia/2456326554876666,09%2F25,695,2852326554876598,400.35
                     const fecha_vencimiento = fechaVen.split("/");
-                    var url = 'http://www.itbank.somee.com/api/Usuarios/Transferencia/' + cuentaOrigen + ',' + fecha_vencimiento[0] + '%2F' + fecha_vencimiento[1] + ',' + token + ',' + '1380990729478099' + ',' + monto;
-                    $.post(url, '', function (returnedData) {
+                    var url = 'https://www.itbank.somee.com/api/Usuarios/Transferencia/' + cuentaOrigen + ',' + fecha_vencimiento[0] + '%2F' + fecha_vencimiento[1] + ',' + token + ',' + '1380990729478099' + ',' + monto;
+                    $.post(url, {}, function (returnedData) {
                         console.log(returnedData)
                         alert('Venta realizada exitosamente.');
                         generarPedido('<%= user.id %>', carrito, returnedData.response.iD_Movimiento);
                     }).fail(function () {
-                        alert('Conexión con banco fallida. Vuelva a intentarlo más tarde.', url);
+                        alert('Conexión con banco fallida. Vuelva a intentarlo más tarde.');
                     })
                     return false;
                 };
