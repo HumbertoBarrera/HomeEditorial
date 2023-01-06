@@ -1,6 +1,6 @@
 function getTotal() {
     var cant = parseInt(document.getElementById("importe").value);
-    var precio = parseInt(document.getElementById("cantidad").value);
+    var precio = parseInt(document.getElementById("cantidadUnidad").value);
     
     console.log(typeof cant);
     console.log(typeof precio);

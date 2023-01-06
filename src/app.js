@@ -90,6 +90,7 @@ app.get('/micuenta', (req, res) => {
 app.get('/mispedidos', (req, res) => {
 	if (req.session.loggedIn) {
 		pool.execute('SELECT * FROM pedido LEFT JOIN envio ON pedido.idPedido = envio.idPedido  WHERE pedido.idCliente = ?', [req.session.user.id]).then(([data, fields]) => {
+			console.log(data);
 			res.render('pedidos', { userLogged: req.session.loggedIn, user: req.session.user, envios: req.session.envios , pedido: data });
 		})
 	} else {

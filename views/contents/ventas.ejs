@@ -21,7 +21,29 @@
 
 <body>
     <script>
-        function registrar_productos()
+        function registrar_productos(){
+            event.preventDefault();
+            var url = 'https://proveedores-api-production.up.railway.app/api/productos';
+            var data = new FormData();
+            data.append("nombre", document.getElementById('nombre').value);
+            data.append("importe", document.getElementById('importe').value);
+            data.append("cantidad", document.getElementById('cantidadUnidad').value);
+            data.append("fecha", document.getElementById('fecha').value);
+            data.append("descripcion", document.getElementById('descripcion').value);
+            // data.append("total", document.getElementById('total').value);
+            var object = {
+                "idProveedor": 33
+            }
+            data.forEach(function(value, key){
+                object[key] = value;
+            })
+            var json = JSON.stringify(object);
+            $.post(url, json, function(returnedData){
+                alert('Producto enviado a proveedores correctamente.')
+            }).fail(function(returnedData){
+                console.log(returnedData);
+            });
+        };
     </script>
     <header id="headerArea">
         <%- include('./shared/nav'); -%>
@@ -118,7 +140,7 @@
                         <input type="number" class="form-control" id="importe" onfocusout="getTotal()" placeholder="Importe">
                     </div>
                     <div class="mb-3">
-                        <input type="number" class="form-control" id="cantidad" onfocusout="getTotal()" placeholder="Cantidad">
+                        <input type="number" class="form-control" id="cantidadUnidad" onfocusout="getTotal()" placeholder="Cantidad">
                     </div>
                     <div class="mb-3">
                         <input type="text" class="form-control" id="descripcion" placeholder="Descripción">
@@ -127,9 +149,9 @@
                         <input type="number" class="form-control" id="total" placeholder="Total" readonly>
                     </div>
                     <div class="mb-3">
-                        <input type="date" class="form-control" id="exampleInputPassword1">
+                        <input type="date" class="form-control" id="fecha">
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" onclick="return registrar_productos(event);" class="btn btn-primary">Submit</button>
                 </form>
             </div>
         </main>

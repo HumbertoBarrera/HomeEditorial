@@ -73,24 +73,18 @@ export const getPedido = async (req, res) => {
 
 export const createPedido = async (req, res) => {
     try{
-        // console.log(req.body.Carrito);
         var montoTotal = 0;
         var ivaTotal = 0;
         const IVA = 16;
         const idCliente = req.params.idCliente;
         const [row_pedido] = await pool.query('INSERT INTO pedido (idCliente) VALUES (?)', [idCliente]);
-        // for(var key in req.body){
-        //     var value = req.body[key]
-        //     value['monto'] = value['precioUni'] * value['cantidad'];
-        //     value['ivaProd'] = value['monto'] * (16/100);
-        // }
         for (var key in req.body.Carrito){
             var orden = req.body.Carrito[key];
             const {id, precio, cantidad, precio_total} = orden;
             var ivaProd = precio * (IVA/100);
             const [row_orden] = await pool.query('INSERT INTO orden (idPedido, idProducto, precioUni, cantidad, monto, iva) VALUES (?, ?, ?, ?, ?, ?)',
                                 [row_pedido.insertId, id, precio, cantidad, precio_total, ivaProd]);
-            // montoTotal += precio_total;
+            const [row_producto] = await pool.query('UPDATE producto SET cantidad = (cantidad - ' + cantidad + ') WHERE idProducto = ?', [id]);
             ivaTotal += ivaProd;
         }
         var date = new Date();
