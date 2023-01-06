@@ -392,6 +392,7 @@
                     "fechaEntrega": fechaEntrega,
                     "idCliente": idCliente
                 }
+                console.log(json);
                 $.post(url, json, function(returnedData){
                     alert('Transporte solicitado correctamente.');
                     // registrarEnvio
