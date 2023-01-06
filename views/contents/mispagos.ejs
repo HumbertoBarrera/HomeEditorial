@@ -377,14 +377,14 @@
                 })
             };
 
-            function solicitarTransporte(idVenta, nombreDestinatario, direccionDestino, fechaEntrega, idCliente, carrito){
+            function solicitarTransporte(idVenta, nombreDestinatario_, direccionDestino_, fechaEntrega_, idCliente, carrito){
                 var url = 'https://transportes-ith-api-production.up.railway.app/api/solicitudes';
                 carrito = JSON.parse(carrito)
-                var productos = '';
+                var productos_ = '';
                 for (let i=0; i < carrito.length; i++){
-                    productos += 'Libro ' + carrito[i].nombre + ', ';
+                    productos_ += 'Libro ' + carrito[i].nombre + ', ';
                 }
-                $.post(url, {numeroVenta: idVenta, productos: productos, nombreDestinatario: nombreDestinatario, direccionDestino: direccionDestino, fechaEntrega: fechaEntrega, idCliente: 6}, function(returnedData){
+                $.post(url, {numeroVenta: idVenta, productos: productos_, nombreDestinatario: nombreDestinatario_, direccionDestino: direccionDestino_, fechaEntrega: fechaEntrega_, idCliente: 6}, function(returnedData){
                     alert('Transporte solicitado correctamente.');
                     // registrarEnvio
                     console.log(returnedData);
