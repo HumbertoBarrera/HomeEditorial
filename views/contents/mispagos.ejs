@@ -378,7 +378,7 @@
             };
 
             function solicitarTransporte(idVenta, nombreDestinatario, direccionDestino, fechaEntrega, idCliente, carrito){
-                var url = 'https://homeeditorial-production.up.railway.app/api/solicitudes';
+                var url = 'https://transportes-ith-api-production.up.railway.app/api/solicitudes';
                 carrito = JSON.parse(carrito)
                 var productos = '';
                 for (let i=0; i < carrito.length; i++){
@@ -392,15 +392,21 @@
                     "fechaEntrega": fechaEntrega,
                     "idCliente": idCliente
                 }
-                console.log(productos)
                 $.post(url, json, function(returnedData){
                     alert('Transporte solicitado correctamente.');
+                    // registrarEnvio
+                    console.log(returnedData);
                     location.href = '/';
                 }).fail(function(returnedData){
                     alert('Error al solicitar transporte.');
                     location.href = '/';
-                })
-            }
+                });
+            };
+
+            function registrarEnvio(){
+                var url = 'https://homeeditorial-production.up.railway.app/envios';
+
+            };
 
         </script>
 
