@@ -342,7 +342,7 @@
                         alert('Venta realizada exitosamente.');
                         generarPedido('<%= user.id %>', carrito, returnedData.response.iD_Movimiento);
                     }).fail(function () {
-                        alert('Conexión con banco fallida. Vuelva a intentarlo más tarde.');
+                        alert('Conexión con banco fallida. Vuelva a intentarlo más tarde.', url);
                     })
                     return false;
                 };
