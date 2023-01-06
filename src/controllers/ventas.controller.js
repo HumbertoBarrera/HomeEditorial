@@ -8,6 +8,7 @@ export const createVenta = async (req, res) => {
                                 [fecha, movimiento, idMetodoPago, idPedido]);
         const [row_pedido] = await pool.query('SELECT total FROM pedido WHERE idPedido = ?', [idPedido])
         req.session.carrito = [];
+        req.session.precioTotal = 0;
         res.send({
             message: 'Venta realizada con éxito.',
             identificador_venta: row_venta.insertId,
