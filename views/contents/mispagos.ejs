@@ -363,8 +363,8 @@
             function registrarVenta(idMovimiento, idPedido, idMetodoPago, carrito){
                 var url = 'https://homeeditorial-production.up.railway.app/api/ventas';
                 var date = new Date();
-                var dd = date.getDate() + 5;
-                var mm = date.getMonth();
+                var dd = (date.getDate()+5);
+                var mm = (date.getMonth()+1);
                 var yyyy = date.getFullYear();
                 var fecha_entrega = yyyy + '-' + mm + '-' + dd;
                 $.post(url, {fecha: date.toISOString().substring(0, 10), movimiento: idMovimiento, idMetodoPago: idMetodoPago, idPedido: idPedido}, function(returnedData){
@@ -384,16 +384,7 @@
                 for (let i=0; i < carrito.length; i++){
                     productos += 'Libro ' + carrito[i].nombre + ', ';
                 }
-                json = {
-                    "numeroVenta": idVenta,
-                    "productos": productos,
-                    "nombreDestinatario": nombreDestinatario,
-                    "direccionDestino": direccionDestino,
-                    "fechaEntrega": fechaEntrega,
-                    "idCliente": idCliente
-                }
-                console.log(json);
-                $.post(url, json, function(returnedData){
+                $.post(url, {numeroVenta: idVenta, productos: productos, nombreDestinatario: nombreDestinatario, direccionDestino: direccionDestino, fechaEntrega: fechaEntrega, idCliente: 6}, function(returnedData){
                     alert('Transporte solicitado correctamente.');
                     // registrarEnvio
                     console.log(returnedData);
@@ -507,6 +498,8 @@
     <footer id="footer">
         <%- include('./shared/footer'); -%>
     </footer>
+    <script type="text/ejs" id="todoList">
+    </script>
 </body>
 
 </html>
