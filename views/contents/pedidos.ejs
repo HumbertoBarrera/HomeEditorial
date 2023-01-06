@@ -42,12 +42,12 @@
                 <tbody>
                     <% for(let i = 0; i < pedido.length; i++) { %>
                         <tr>
-                            <th scope="row"><%= pedido[i]['idPedido'] %></th>
-                            <td><%= pedido[i]['fecha'] %></td>
-                            <td><%= pedido[i]['total'] %></td>
-                            <td><%= pedido[i]['fechaEntrega']%></td>
-                            <td><%= pedido[i]['estadoEnvio'] %></td>
-                            <td><%= pedido[i]['claveRastreo'] %></td>
+                            <th scope="row"><%= pedido[i].idPedido %></th>
+                            <td><%= pedido[i].fecha %></td>
+                            <td><%= pedido[i].total %></td>
+                            <td><%= pedido[i].fechaEntrega %></td>
+                            <td><%= pedido[i].estadoEnvio %></td>
+                            <td><%= pedido[i].claveRastreo %></td>
                             <td>No disponible</td>
                         </tr>
                     <% } %>
